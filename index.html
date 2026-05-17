@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vistas — Revenue Estimator Mockups</title>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    body { background: var(--gray-50); }
+    .index-page {
+      max-width: 640px;
+      margin: 80px auto;
+      text-align: center;
+    }
+    .index-logo {
+      margin-bottom: 8px;
+    }
+    .index-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .index-subtitle {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-bottom: 40px;
+    }
+    .index-links {
+      list-style: none;
+      text-align: left;
+    }
+    .index-links li {
+      margin-bottom: 8px;
+    }
+    .index-links a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--navy);
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.15s;
+      box-shadow: var(--shadow-sm);
+    }
+    .index-links a:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+      border-color: var(--sage);
+    }
+    .index-links .page-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--sage-pale);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-right: 12px;
+    }
+    .index-links .page-desc {
+      font-size: 12px;
+      color: var(--gray-500);
+      font-weight: 400;
+    }
+  </style>
+</head>
+<body>
+  <div class="index-page">
+    <div class="index-logo">
+      <svg width="48" height="48" viewBox="0 0 60 60" fill="none">
+        <circle cx="30" cy="30" r="28" fill="#eef4ec" stroke="#A8C4A0" stroke-width="2"/>
+        <path d="M20 38 L30 20 L40 38 Z" fill="#1B2E4B" opacity="0.8"/>
+        <path d="M24 38 L30 26 L36 38 Z" fill="#A8C4A0"/>
+      </svg>
+    </div>
+    <h1 class="index-title">Ozarks Vistas Revenue</h1>
+    <p class="index-subtitle">UI Mockups — Revenue Estimate Generator</p>
+
+    <ul class="index-links">
+      <li>
+        <a href="01-login.html">
+          <div>
+            <span class="page-num">1</span>
+            Login
+            <div class="page-desc" style="margin-left: 40px;">Branded sign-in with email/password + Google SSO</div>
+          </div>
+          &rarr;
+        </a>
+      </li>
+      <li>
+        <a href="02-dashboard.html">
+          <div>
+            <span class="page-num">2</span>
+            Dashboard
+            <div class="page-desc" style="margin-left: 40px;">4 market cards, quick stats, recent estimates</div>
+          </div>
+          &rarr;
+        </a>
+      </li>
+      <li>
+        <a href="03-estimates-list.html">
+          <div>
+            <span class="page-num">3</span>
+            Estimates List
+            <div class="page-desc" style="margin-left: 40px;">Search, filter by BR, View / Edit / PDF actions</div>
+          </div>
+          &rarr;
+        </a>
+      </li>
+      <li>
+        <a href="04-view-report.html">
+          <div>
+            <span class="page-num">4</span>
+            View Report
+            <div class="page-desc" style="margin-left: 40px;">Read-only rendered report with Download PDF / Email</div>
+          </div>
+          &rarr;
+        </a>
+      </li>
+      <li>
+        <a href="05-add-edit.html">
+          <div>
+            <span class="page-num">5</span>
+            Add / Edit Estimate
+            <div class="page-desc" style="margin-left: 40px;">Agent profile, property info, comp filters, market KPIs</div>
+          </div>
+          &rarr;
+        </a>
+      </li>
+      <li>
+        <a href="06-settings.html">
+          <div>
+            <span class="page-num">6</span>
+            Settings
+            <div class="page-desc" style="margin-left: 40px;">PriceLabs accounts, agent profiles, market data imports</div>
+          </div>
+          &rarr;
+        </a>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>

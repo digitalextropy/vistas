@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Revenue Estimator</title>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .welcome {
+      margin-bottom: 32px;
+    }
+    .welcome h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .welcome p {
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+    .market-card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--sage-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      font-size: 18px;
+    }
+    .market-card-actions {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--gray-100);
+      display: flex;
+      gap: 8px;
+    }
+    .quick-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .quick-stat {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .quick-stat-value {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .quick-stat-label {
+      font-size: 11px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-top: 2px;
+    }
+    .recent-section { margin-top: 32px; }
+    .recent-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Nav -->
+  <nav class="topnav">
+    <div class="topnav-left">
+      <a href="#" class="topnav-logo">Ozarks Vistas <span>Revenue</span></a>
+    </div>
+    <div class="topnav-right">
+      <a href="06-settings.html" class="topnav-icon" title="Settings">&#9881;</a>
+      <div class="topnav-avatar">VB</div>
+    </div>
+  </nav>
+
+  <div class="page">
+    <!-- Welcome -->
+    <div class="welcome">
+      <h1>Good afternoon, Vicki</h1>
+      <p>Select a market to view or create revenue estimates.</p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="quick-stats">
+      <div class="quick-stat">
+        <div class="quick-stat-value">4</div>
+        <div class="quick-stat-label">Markets</div>
+      </div>
+      <div class="quick-stat">
+        <div class="quick-stat-value">47</div>
+        <div class="quick-stat-label">Total Estimates</div>
+      </div>
+      <div class="quick-stat">
+        <div class="quick-stat-value">12</div>
+        <div class="quick-stat-label">This Month</div>
+      </div>
+      <div class="quick-stat">
+        <div class="quick-stat-value">May 1</div>
+        <div class="quick-stat-label">Last Data Refresh</div>
+      </div>
+    </div>
+
+    <!-- Market Cards -->
+    <div class="market-grid">
+      <a href="03-estimates-list.html" class="market-card" style="text-decoration:none;">
+        <div class="market-card-icon">&#127758;</div>
+        <div class="market-card-name">Lake of the Ozarks</div>
+        <div class="market-card-stat">
+          <span>Estimates</span> <strong>23</strong>
+        </div>
+        <div class="market-card-stat">
+          <span>Active Listings</span> <strong>554</strong>
+        </div>
+        <div class="market-card-stat">
+          <span>Last Refresh</span> <strong>May 1, 2026</strong>
+        </div>
+        <div class="market-card-actions">
+          <span class="badge badge-sage">3 PriceLabs accounts</span>
+        </div>
+      </a>
+
+      <div class="market-card">
+        <div class="market-card-icon">&#127956;</div>
+        <div class="market-card-name">Branson</div>
+        <div class="market-card-stat">
+          <span>Estimates</span> <strong>15</strong>
+        </div>
+        <div class="market-card-stat">
+          <span>Active Listings</span> <strong>312</strong>
+        </div>
+        <div class="market-card-stat">
+          <span>Last Refresh</span> <strong>May 1, 2026</strong>
+        </div>
+        <div class="market-card-actions">
+          <span class="badge badge-sage">1 PriceLabs account</span>
+        </div>
+      </div>
+
+      <div class="market-card">
+        <div class="market-card-icon">&#127795;</div>
+        <div class="market-card-name">Poconos</div>
+        <div class="market-card-stat">
+          <span>Estimates</span> <strong>6</strong>
+        </div>
+        <div class="market-card-stat">
+          <span>Active Listings</span> <strong>428</strong>
+        </div>
+        <div class="market-card-stat">
+          <span>Last Refresh</span> <strong>Apr 28, 2026</strong>
+        </div>
+        <div class="market-card-actions">
+          <span class="badge badge-sage">1 PriceLabs account</span>
+        </div>
+      </div>
+
+      <div class="market-card">
+        <div class="market-card-icon">&#127754;</div>
+        <div class="market-card-name">Deep Creek Lake</div>
+        <div class="market-card-stat">
+          <span>Estimates</span> <strong>3</strong>
+        </div>
+        <div class="market-card-stat">
+          <span>Active Listings</span> <strong>189</strong>
+        </div>
+        <div class="market-card-stat">
+          <span>Last Refresh</span> <strong>Apr 28, 2026</strong>
+        </div>
+        <div class="market-card-actions">
+          <span class="badge badge-sage">1 PriceLabs account</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Estimates -->
+    <div class="recent-section">
+      <div class="recent-title">Recent Estimates</div>
+      <div class="card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Market</th>
+              <th>BR</th>
+              <th>Est. Revenue</th>
+              <th>Created</th>
+              <th>Agent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1481 Ledges Dr, #948</strong></td>
+              <td>Lake of the Ozarks</td>
+              <td>3</td>
+              <td class="text-green font-bold">$14,705</td>
+              <td>May 15, 2026</td>
+              <td>Vicki B.</td>
+            </tr>
+            <tr>
+              <td><strong>234 Lakewood Ct</strong></td>
+              <td>Lake of the Ozarks</td>
+              <td>4</td>
+              <td class="text-green font-bold">$22,400</td>
+              <td>May 14, 2026</td>
+              <td>Vicki B.</td>
+            </tr>
+            <tr>
+              <td><strong>18 Sunrise Ridge</strong></td>
+              <td>Branson</td>
+              <td>2</td>
+              <td class="font-bold">$11,200</td>
+              <td>May 12, 2026</td>
+              <td>Vicki B.</td>
+            </tr>
+            <tr>
+              <td><strong>770 Pine Valley Dr</strong></td>
+              <td>Deep Creek Lake</td>
+              <td>5</td>
+              <td class="text-green font-bold">$34,800</td>
+              <td>May 10, 2026</td>
+              <td>Vicki B.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

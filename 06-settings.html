@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — Revenue Estimator</title>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .settings-layout {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 24px;
+    }
+    .settings-nav {
+      list-style: none;
+    }
+    .settings-nav li {
+      margin-bottom: 2px;
+    }
+    .settings-nav a {
+      display: block;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--gray-700);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .settings-nav a:hover { background: var(--gray-100); }
+    .settings-nav a.active {
+      background: var(--sage-pale);
+      color: var(--navy);
+      font-weight: 600;
+    }
+    .settings-section { margin-bottom: 32px; }
+    .settings-section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .settings-section-desc {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+    }
+    .account-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+    }
+    .account-card-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .account-card-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--sage-pale);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .account-card-name { font-weight: 600; font-size: 13px; color: var(--navy); }
+    .account-card-detail { font-size: 11px; color: var(--gray-500); }
+    .account-card-markets {
+      display: flex;
+      gap: 4px;
+    }
+    .agent-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+    }
+    .agent-card-logo {
+      width: 48px;
+      height: 48px;
+      background: var(--sage-pale);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--gray-500);
+    }
+    .agent-card-info { flex: 1; }
+    .agent-card-name { font-weight: 700; color: var(--navy); font-size: 14px; }
+    .agent-card-contact { font-size: 12px; color: var(--gray-500); }
+    .agent-card-default {
+      font-size: 10px;
+      background: var(--sage-pale);
+      color: var(--navy);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .refresh-card {
+      padding: 16px 20px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+    }
+    .refresh-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .refresh-card-title { font-weight: 600; font-size: 13px; color: var(--navy); }
+    .refresh-card-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--gray-500);
+    }
+    .refresh-card-bar {
+      height: 4px;
+      background: var(--gray-200);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .refresh-card-bar-fill {
+      height: 100%;
+      background: var(--sage);
+      border-radius: 2px;
+    }
+    .data-stat-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      padding: 4px 0;
+      color: var(--gray-700);
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Nav -->
+  <nav class="topnav">
+    <div class="topnav-left">
+      <a href="02-dashboard.html" class="topnav-logo">Ozarks Vistas <span>Revenue</span></a>
+    </div>
+    <div class="topnav-right">
+      <a href="06-settings.html" class="topnav-icon" title="Settings" style="background: rgba(255,255,255,0.2);">&#9881;</a>
+      <div class="topnav-avatar">VB</div>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="page-header">
+      <h1 class="page-title">Settings</h1>
+    </div>
+
+    <div class="settings-layout">
+      <!-- Sidebar Nav -->
+      <nav>
+        <ul class="settings-nav">
+          <li><a href="#" class="active">PriceLabs Accounts</a></li>
+          <li><a href="#">Agent Profiles</a></li>
+          <li><a href="#">Market Data</a></li>
+          <li><a href="#">Users</a></li>
+        </ul>
+      </nav>
+
+      <!-- Content -->
+      <div>
+        <!-- PriceLabs Accounts Section -->
+        <div class="settings-section">
+          <div class="settings-section-title">PriceLabs Accounts</div>
+          <div class="settings-section-desc">
+            Connect your PriceLabs dashboards to import market data. Each account can cover one or more markets.
+          </div>
+
+          <div class="account-card">
+            <div class="account-card-info">
+              <div class="account-card-icon">&#128200;</div>
+              <div>
+                <div class="account-card-name">Ozarks Vistas — Missouri</div>
+                <div class="account-card-detail">2 dashboards &middot; Last sync: May 1, 2026</div>
+              </div>
+            </div>
+            <div class="account-card-markets">
+              <span class="badge badge-sage">Lake of the Ozarks</span>
+              <span class="badge badge-sage">Branson</span>
+            </div>
+          </div>
+
+          <div class="account-card">
+            <div class="account-card-info">
+              <div class="account-card-icon">&#128200;</div>
+              <div>
+                <div class="account-card-name">Ozarks Vistas — Poconos</div>
+                <div class="account-card-detail">1 dashboard &middot; Last sync: Apr 28, 2026</div>
+              </div>
+            </div>
+            <div class="account-card-markets">
+              <span class="badge badge-sage">Poconos</span>
+            </div>
+          </div>
+
+          <div class="account-card">
+            <div class="account-card-info">
+              <div class="account-card-icon">&#128200;</div>
+              <div>
+                <div class="account-card-name">Ozarks Vistas — Deep Creek</div>
+                <div class="account-card-detail">1 dashboard &middot; Last sync: Apr 28, 2026</div>
+              </div>
+            </div>
+            <div class="account-card-markets">
+              <span class="badge badge-sage">Deep Creek Lake</span>
+            </div>
+          </div>
+
+          <button class="btn btn-secondary" style="margin-top: 12px;">+ Add PriceLabs Account</button>
+        </div>
+
+        <!-- Agent Profiles Section -->
+        <div class="settings-section">
+          <div class="settings-section-title">Agent Profiles</div>
+          <div class="settings-section-desc">
+            Manage agent information that appears on revenue estimate reports.
+          </div>
+
+          <div class="agent-card">
+            <div class="agent-card-logo">LOGO</div>
+            <div class="agent-card-info">
+              <div class="agent-card-name">Vicki Brown <span class="agent-card-default">DEFAULT</span></div>
+              <div class="agent-card-contact">vicki@ozarksvistas.com &middot; 251.284.8661</div>
+            </div>
+            <div style="display: flex; gap: 6px;">
+              <button class="btn btn-secondary btn-sm">Edit</button>
+            </div>
+          </div>
+
+          <div class="agent-card">
+            <div class="agent-card-logo">LOGO</div>
+            <div class="agent-card-info">
+              <div class="agent-card-name">Justin Holder</div>
+              <div class="agent-card-contact">justin@ozarksvistas.com &middot; 555.123.4567</div>
+            </div>
+            <div style="display: flex; gap: 6px;">
+              <button class="btn btn-secondary btn-sm">Edit</button>
+              <button class="btn btn-secondary btn-sm" style="color: var(--red);">Remove</button>
+            </div>
+          </div>
+
+          <button class="btn btn-secondary" style="margin-top: 12px;">+ Add Agent</button>
+        </div>
+
+        <!-- Market Data Section -->
+        <div class="settings-section">
+          <div class="settings-section-title">Market Data</div>
+          <div class="settings-section-desc">
+            View data freshness and trigger manual refreshes. Data is imported from PriceLabs monthly.
+          </div>
+
+          <div class="refresh-card">
+            <div class="refresh-card-header">
+              <div class="refresh-card-title">Lake of the Ozarks</div>
+              <div class="refresh-card-status">
+                <span class="status-dot status-dot-green"></span> Up to date
+              </div>
+            </div>
+            <div class="data-stat-row">
+              <span>Total listings</span> <strong>1,350</strong>
+            </div>
+            <div class="data-stat-row">
+              <span>Geocoded listings</span> <strong>892 / 1,350 (66%)</strong>
+            </div>
+            <div class="data-stat-row">
+              <span>Market history</span> <strong>25 months (May 2024 – May 2026)</strong>
+            </div>
+            <div class="data-stat-row">
+              <span>Last import</span> <strong>May 1, 2026</strong>
+            </div>
+            <div style="margin-top: 10px; display: flex; gap: 8px;">
+              <button class="btn btn-secondary btn-sm">Import Listings CSV</button>
+              <button class="btn btn-secondary btn-sm">Import Market History CSV</button>
+              <button class="btn btn-secondary btn-sm">Backfill Coordinates</button>
+            </div>
+          </div>
+
+          <div class="refresh-card">
+            <div class="refresh-card-header">
+              <div class="refresh-card-title">Branson</div>
+              <div class="refresh-card-status">
+                <span class="status-dot status-dot-green"></span> Up to date
+              </div>
+            </div>
+            <div class="data-stat-row">
+              <span>Total listings</span> <strong>780</strong>
+            </div>
+            <div class="data-stat-row">
+              <span>Geocoded listings</span> <strong>512 / 780 (66%)</strong>
+            </div>
+            <div class="data-stat-row">
+              <span>Market history</span> <strong>25 months</strong>
+            </div>
+            <div class="data-stat-row">
+              <span>Last import</span> <strong>May 1, 2026</strong>
+            </div>
+            <div style="margin-top: 10px; display: flex; gap: 8px;">
+              <button class="btn btn-secondary btn-sm">Import Listings CSV</button>
+              <button class="btn btn-secondary btn-sm">Import Market History CSV</button>
+              <button class="btn btn-secondary btn-sm">Backfill Coordinates</button>
+            </div>
+          </div>
+
+          <div class="refresh-card">
+            <div class="refresh-card-header">
+              <div class="refresh-card-title">Poconos</div>
+              <div class="refresh-card-status">
+                <span class="status-dot status-dot-gray"></span> 19 days since last import
+              </div>
+            </div>
+            <div class="data-stat-row">
+              <span>Total listings</span> <strong>428</strong>
+            </div>
+            <div class="data-stat-row">
+              <span>Geocoded listings</span> <strong>285 / 428 (67%)</strong>
+            </div>
+            <div class="data-stat-row">
+              <span>Market history</span> <strong>25 months</strong>
+            </div>
+            <div class="data-stat-row">
+              <span>Last import</span> <strong>Apr 28, 2026</strong>
+            </div>
+            <div style="margin-top: 10px; display: flex; gap: 8px;">
+              <button class="btn btn-secondary btn-sm">Import Listings CSV</button>
+              <button class="btn btn-secondary btn-sm">Import Market History CSV</button>
+              <button class="btn btn-secondary btn-sm">Backfill Coordinates</button>
+            </div>
+          </div>
+
+          <div class="refresh-card">
+            <div class="refresh-card-header">
+              <div class="refresh-card-title">Deep Creek Lake</div>
+              <div class="refresh-card-status">
+                <span class="status-dot status-dot-gray"></span> 19 days since last import
+              </div>
+            </div>
+            <div class="data-stat-row">
+              <span>Total listings</span> <strong>189</strong>
+            </div>
+            <div class="data-stat-row">
+              <span>Geocoded listings</span> <strong>124 / 189 (66%)</strong>
+            </div>
+            <div class="data-stat-row">
+              <span>Market history</span> <strong>25 months</strong>
+            </div>
+            <div class="data-stat-row">
+              <span>Last import</span> <strong>Apr 28, 2026</strong>
+            </div>
+            <div style="margin-top: 10px; display: flex; gap: 8px;">
+              <button class="btn btn-secondary btn-sm">Import Listings CSV</button>
+              <button class="btn btn-secondary btn-sm">Import Market History CSV</button>
+              <button class="btn btn-secondary btn-sm">Backfill Coordinates</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

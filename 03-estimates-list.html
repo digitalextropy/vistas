@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lake of the Ozarks — Estimates</title>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .list-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .search-input {
+      flex: 1;
+      max-width: 320px;
+      padding: 9px 14px 9px 36px;
+      border: 1px solid var(--gray-300);
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: inherit;
+      background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236c757d' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") 12px center no-repeat;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--navy);
+    }
+    .filter-pills { display: flex; gap: 6px; }
+    .filter-pill {
+      padding: 6px 12px;
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid var(--gray-300);
+      background: var(--white);
+      cursor: pointer;
+      color: var(--gray-700);
+    }
+    .filter-pill.active {
+      background: var(--sage-pale);
+      border-color: var(--sage);
+      color: var(--navy);
+    }
+    .row-actions { display: flex; gap: 4px; }
+    .row-actions .btn-sm {
+      padding: 4px 10px;
+      font-size: 11px;
+      border-radius: 4px;
+    }
+    .revenue-high { color: var(--green); font-weight: 700; }
+    .revenue-mid { color: var(--gray-900); font-weight: 700; }
+    .revenue-low { color: var(--red); font-weight: 700; }
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray-500);
+    }
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+    .pagination-btns { display: flex; gap: 4px; }
+    .pagination-btns button {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--gray-300);
+      border-radius: 4px;
+      background: var(--white);
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .pagination-btns button.active {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Nav -->
+  <nav class="topnav">
+    <div class="topnav-left">
+      <a href="02-dashboard.html" class="topnav-logo">Ozarks Vistas <span>Revenue</span></a>
+      <select class="topnav-market">
+        <option selected>Lake of the Ozarks</option>
+        <option>Branson</option>
+        <option>Poconos</option>
+        <option>Deep Creek Lake</option>
+      </select>
+    </div>
+    <div class="topnav-right">
+      <a href="06-settings.html" class="topnav-icon" title="Settings">&#9881;</a>
+      <div class="topnav-avatar">VB</div>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Revenue Estimates</h1>
+        <div class="page-subtitle">Lake of the Ozarks &middot; 23 estimates</div>
+      </div>
+      <a href="05-add-edit.html" class="btn btn-primary">+ New Estimate</a>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="list-toolbar">
+      <input type="text" class="search-input" placeholder="Search properties...">
+      <div class="filter-pills">
+        <span class="filter-pill active">All</span>
+        <span class="filter-pill">1 BR</span>
+        <span class="filter-pill">2 BR</span>
+        <span class="filter-pill">3 BR</span>
+        <span class="filter-pill">4 BR</span>
+        <span class="filter-pill">5+ BR</span>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Address</th>
+            <th>BR</th>
+            <th>Est. Revenue</th>
+            <th>Comps</th>
+            <th>Created</th>
+            <th>Agent</th>
+            <th style="width: 160px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1481 Ledges Dr, #948</strong></td>
+            <td>Osage Beach, MO</td>
+            <td>3</td>
+            <td class="revenue-mid">$14,705</td>
+            <td>554</td>
+            <td>May 15, 2026</td>
+            <td>Vicki B.</td>
+            <td>
+              <div class="row-actions">
+                <a href="04-view-report.html" class="btn btn-secondary btn-sm">View</a>
+                <a href="05-add-edit.html" class="btn btn-secondary btn-sm">Edit</a>
+                <button class="btn btn-sage btn-sm">PDF</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>234 Lakewood Ct</strong></td>
+            <td>Lake Ozark, MO</td>
+            <td>4</td>
+            <td class="revenue-high">$22,400</td>
+            <td>312</td>
+            <td>May 14, 2026</td>
+            <td>Vicki B.</td>
+            <td>
+              <div class="row-actions">
+                <a href="#" class="btn btn-secondary btn-sm">View</a>
+                <a href="#" class="btn btn-secondary btn-sm">Edit</a>
+                <button class="btn btn-sage btn-sm">PDF</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>88 Harbor Point</strong></td>
+            <td>Sunrise Beach, MO</td>
+            <td>3</td>
+            <td class="revenue-high">$18,299</td>
+            <td>268</td>
+            <td>May 12, 2026</td>
+            <td>Vicki B.</td>
+            <td>
+              <div class="row-actions">
+                <a href="#" class="btn btn-secondary btn-sm">View</a>
+                <a href="#" class="btn btn-secondary btn-sm">Edit</a>
+                <button class="btn btn-sage btn-sm">PDF</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>1920 Horseshoe Bend</strong></td>
+            <td>Camdenton, MO</td>
+            <td>5</td>
+            <td class="revenue-high">$31,500</td>
+            <td>142</td>
+            <td>May 8, 2026</td>
+            <td>Vicki B.</td>
+            <td>
+              <div class="row-actions">
+                <a href="#" class="btn btn-secondary btn-sm">View</a>
+                <a href="#" class="btn btn-secondary btn-sm">Edit</a>
+                <button class="btn btn-sage btn-sm">PDF</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>45 Quiet Cove Rd</strong></td>
+            <td>Gravois Mills, MO</td>
+            <td>2</td>
+            <td class="revenue-low">$9,800</td>
+            <td>410</td>
+            <td>May 5, 2026</td>
+            <td>Vicki B.</td>
+            <td>
+              <div class="row-actions">
+                <a href="#" class="btn btn-secondary btn-sm">View</a>
+                <a href="#" class="btn btn-secondary btn-sm">Edit</a>
+                <button class="btn btn-sage btn-sm">PDF</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>312 Grand View Ter</strong></td>
+            <td>Porto Cima, MO</td>
+            <td>4</td>
+            <td class="revenue-high">$26,100</td>
+            <td>198</td>
+            <td>Apr 30, 2026</td>
+            <td>Vicki B.</td>
+            <td>
+              <div class="row-actions">
+                <a href="#" class="btn btn-secondary btn-sm">View</a>
+                <a href="#" class="btn btn-secondary btn-sm">Edit</a>
+                <button class="btn btn-sage btn-sm">PDF</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <span>Showing 1–6 of 23 estimates</span>
+      <div class="pagination-btns">
+        <button class="active">1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>4</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
