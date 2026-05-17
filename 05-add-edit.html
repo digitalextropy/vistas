@@ -76,6 +76,12 @@
     .geocode-row .form-group { flex: 1; margin-bottom: 0; }
     .coord-display { font-size: 11px; color: var(--gray-500); margin-top: 4px; }
     .coord-display code { background: var(--gray-100); padding: 2px 6px; border-radius: 3px; font-size: 11px; }
+    .usage-note {
+      font-size: 11px; color: var(--gray-700); padding: 10px 14px;
+      background: var(--sage-pale); border-left: 3px solid var(--sage);
+      border-radius: 0 6px 6px 0; margin-bottom: 14px; line-height: 1.6;
+    }
+    .usage-note strong { color: var(--navy); }
   </style>
 </head>
 <body>
@@ -167,7 +173,7 @@
     <div class="section">
       <div class="section-header">
         <div class="section-title">Comp Set Filters</div>
-        <div class="comp-count-badge"><span class="count">247</span> comps match</div>
+        <div class="comp-count-badge"><span class="count" id="compMatchCount">247</span> comps match</div>
       </div>
       <div class="section-body">
         <div class="filter-section">
@@ -244,7 +250,7 @@
           <div class="comp-toolbar">
             <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
               <input type="checkbox" id="selectAll" checked onchange="toggleAll(this.checked)">
-              <strong>247 comps</strong> &mdash; <span id="selectedCount">247 selected</span>
+              <strong id="compTotalLabel">247 comps</strong> &mdash; <span id="selectedCount">247 of 247 selected</span>
             </label>
             <span style="color: var(--gray-400);">Click column headers to sort</span>
           </div>
@@ -263,41 +269,26 @@
                   <th data-col="8">Dist.</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345001" target="_blank">Luxury Lakefront Retreat 3BR</a></td><td>Entire home</td><td style="font-weight:600;color:var(--green);">$32,400</td><td>$285</td><td>4.9</td><td>142</td><td>68%</td><td>3.2 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345002" target="_blank">Cove Point Villa w/ Dock</a></td><td>Entire home</td><td style="font-weight:600;color:var(--green);">$28,100</td><td>$260</td><td>4.8</td><td>98</td><td>62%</td><td>5.1 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345003" target="_blank">Sunset Bay Condo Unit 5</a></td><td>Entire home</td><td style="font-weight:600;color:var(--green);">$21,500</td><td>$225</td><td>4.7</td><td>76</td><td>55%</td><td>1.8 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345004" target="_blank">Eagles Nest Lakeside 3BR</a></td><td>Entire home</td><td style="font-weight:600;">$19,200</td><td>$210</td><td>4.6</td><td>64</td><td>48%</td><td>8.4 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345005" target="_blank">Horseshoe Bend Hideaway</a></td><td>Entire home</td><td style="font-weight:600;">$16,800</td><td>$195</td><td>4.5</td><td>53</td><td>42%</td><td>12.3 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345006" target="_blank">Ozark Shores Family Home</a></td><td>Entire home</td><td style="font-weight:600;">$14,705</td><td>$185</td><td>4.4</td><td>41</td><td>38%</td><td>6.7 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345007" target="_blank">Lakeside Manor 3BR Condo</a></td><td>Entire home</td><td style="font-weight:600;">$14,200</td><td>$180</td><td>4.4</td><td>38</td><td>36%</td><td>9.1 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345008" target="_blank">Crystal Cove Retreat</a></td><td>Entire home</td><td style="font-weight:600;">$13,500</td><td>$178</td><td>4.3</td><td>35</td><td>34%</td><td>14.5 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345009" target="_blank">Windmill Point Lodge</a></td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$12,800</td><td>$172</td><td>4.3</td><td>29</td><td>32%</td><td>11.2 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345010" target="_blank">Quiet Waters 3BR Condo</a></td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$11,200</td><td>$165</td><td>4.3</td><td>27</td><td>30%</td><td>15.2 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345011" target="_blank">Driftwood Bay Cottage</a></td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$10,900</td><td>$160</td><td>4.2</td><td>24</td><td>28%</td><td>17.8 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345012" target="_blank">Lakeview Terrace Unit 12</a></td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$9,800</td><td>$150</td><td>4.1</td><td>19</td><td>26%</td><td>18.9 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345013" target="_blank">Harbor Light Inn Suite</a></td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$8,600</td><td>$142</td><td>4.0</td><td>15</td><td>22%</td><td>20.1 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345014" target="_blank">Sleepy Hollow Lake House</a></td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$7,900</td><td>$135</td><td>3.9</td><td>12</td><td>20%</td><td>22.4 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345015" target="_blank">Pine Ridge Cabin 3BR</a></td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$6,200</td><td>$120</td><td>3.8</td><td>8</td><td>18%</td><td>25.6 mi</td></tr>
+              <tbody id="compBody">
               </tbody>
             </table>
           </div>
-          <div style="padding: 8px 12px; background: var(--gray-50); border-top: 1px solid var(--gray-200); font-size: 11px; color: var(--gray-500); text-align: center;">
-            Showing 15 of 247 matching comps (scroll for more)
+          <div id="compFooter" style="padding: 8px 12px; background: var(--gray-50); border-top: 1px solid var(--gray-200); font-size: 11px; color: var(--gray-500); text-align: center;">
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Section 4: Market KPIs -->
+    <!-- Section 4: Market Benchmarks -->
     <div class="section">
       <div class="section-header">
-        <div class="section-title">Market KPIs (3BR)</div>
+        <div class="section-title">Market Benchmarks (All 3BR Listings)</div>
         <span class="section-badge">Auto-populated</span>
       </div>
       <div class="section-body">
-        <div style="font-size: 11px; color: var(--gray-500); font-style: italic; padding: 8px 12px; background: var(--sage-pale); border-radius: 4px; margin-bottom: 12px;">
-          Market-wide averages for 3BR listings from PriceLabs (May 1, 2026). These appear on the report cover page and market overview. Edit only if overriding.
+        <div class="usage-note">
+          <strong>Scope:</strong> Market-wide averages for <strong>all 3BR listings</strong> from PriceLabs (May 1, 2026). These are <em>not</em> filtered by the comp set criteria above (bathrooms, category, amenities, etc.).<br>
+          <strong>Used on report:</strong> Page 3 &mdash; "Market Context" table (right column). Provides a benchmark comparison against the filtered comp set. Edit only if overriding PriceLabs data.
         </div>
         <div class="form-row-3">
           <div class="form-group"><label class="form-label">Market Avg Revenue</label><input type="text" class="form-input" value="$20,350"></div>
@@ -325,11 +316,81 @@
   </div>
 
   <script>
+    // Generate 247 comp rows
+    const compData = [
+      {id:12345001, name:'Luxury Lakefront Retreat 3BR', type:'Entire home', rev:52100, price:385, rating:4.9, reviews:142, occ:68, dist:3.2},
+      {id:12345002, name:'Grand Lakefront Estate w/ Dock', type:'Entire home', rev:48200, price:360, rating:4.9, reviews:118, occ:65, dist:2.1},
+      {id:12345003, name:'Sunset Pointe Waterfront Villa', type:'Entire home', rev:42800, price:340, rating:4.8, reviews:96, occ:62, dist:5.1},
+      {id:12345004, name:'Cove Point Premium Lakehouse', type:'Entire home', rev:38500, price:310, rating:4.8, reviews:87, occ:60, dist:4.8},
+      {id:12345005, name:'Eagles Nest Lake View 3BR', type:'Entire home', rev:35200, price:295, rating:4.8, reviews:74, occ:58, dist:7.3},
+      {id:12345006, name:'Horseshoe Bend Modern Lakehouse', type:'Entire home', rev:32400, price:285, rating:4.7, reviews:68, occ:55, dist:8.4},
+      {id:12345007, name:'Ozark Shores Family Retreat', type:'Entire home', rev:30100, price:270, rating:4.7, reviews:62, occ:52, dist:6.7},
+      {id:12345008, name:'Regatta Bay Lakefront Condo', type:'Entire home', rev:28100, price:260, rating:4.6, reviews:55, occ:48, dist:9.1},
+      {id:12345009, name:'Crystal Cove 3BR Suite', type:'Entire home', rev:26400, price:250, rating:4.6, reviews:49, occ:45, dist:11.2},
+      {id:12345010, name:'Windmill Point Lodge 3BR', type:'Entire home', rev:24800, price:240, rating:4.6, reviews:45, occ:43, dist:5.6},
+      {id:12345011, name:'Porto Cima Lakefront Home', type:'Entire home', rev:23200, price:232, rating:4.5, reviews:42, occ:41, dist:12.3},
+      {id:12345012, name:'Lakeside Manor 3BR Condo', type:'Entire home', rev:21500, price:225, rating:4.5, reviews:39, occ:38, dist:3.8},
+      {id:12345013, name:'Sunrise Beach Getaway', type:'Entire home', rev:20200, price:218, rating:4.5, reviews:36, occ:36, dist:14.5},
+      {id:12345014, name:'Arrowhead Point Retreat', type:'Entire home', rev:19800, price:210, rating:4.5, reviews:34, occ:35, dist:10.4},
+      {id:12345015, name:'Quiet Waters Lakefront Cabin', type:'Entire home', rev:18900, price:205, rating:4.4, reviews:33, occ:34, dist:15.2},
+      {id:12345016, name:'Osage Beach Vista Condo', type:'Entire home', rev:18200, price:200, rating:4.4, reviews:31, occ:33, dist:1.8},
+      {id:12345017, name:'Ozark Retreat w/ Lake Access', type:'Entire home', rev:17500, price:198, rating:4.4, reviews:29, occ:32, dist:16.8},
+      {id:12345018, name:'Harbor Light Inn Suite', type:'Entire home', rev:16800, price:195, rating:4.4, reviews:28, occ:31, dist:8.9},
+      {id:12345019, name:'Shawnee Bend Lake Cottage', type:'Entire home', rev:16200, price:190, rating:4.3, reviews:27, occ:30, dist:18.1},
+      {id:12345020, name:'Ledges Lakefront 3BR', type:'Entire home', rev:15600, price:188, rating:4.3, reviews:25, occ:29, dist:0.4},
+      {id:12345021, name:'Camdenton Lake Cabin', type:'Entire home', rev:14705, price:185, rating:4.3, reviews:24, occ:28, dist:6.2},
+      {id:12345022, name:'Blue Water Bay Condo', type:'Entire home', rev:14200, price:182, rating:4.3, reviews:23, occ:27, dist:19.5},
+      {id:12345023, name:'Driftwood Bay Cottage', type:'Entire home', rev:13800, price:180, rating:4.2, reviews:22, occ:26, dist:17.8},
+      {id:12345024, name:'Maple Ridge Lake House', type:'Entire home', rev:13200, price:178, rating:4.2, reviews:21, occ:25, dist:20.1},
+      {id:12345025, name:'Lazy River 3BR Retreat', type:'Entire home', rev:12800, price:175, rating:4.2, reviews:20, occ:24, dist:22.4},
+      {id:12345026, name:'Dogwood Point Cabin', type:'Entire home', rev:12300, price:172, rating:4.1, reviews:19, occ:23, dist:14.7},
+      {id:12345027, name:'Palisades View Condo 3BR', type:'Entire home', rev:11800, price:168, rating:4.1, reviews:18, occ:22, dist:25.1},
+      {id:12345028, name:'Whispering Pines Lakefront', type:'Entire home', rev:11200, price:165, rating:4.1, reviews:17, occ:21, dist:23.6},
+      {id:12345029, name:'Silver Creek Lake Cabin', type:'Entire home', rev:10900, price:160, rating:4.0, reviews:16, occ:20, dist:18.9},
+      {id:12345030, name:'Lakeview Terrace Unit 12', type:'Entire home', rev:10500, price:155, rating:4.0, reviews:15, occ:19, dist:20.3},
+      {id:12345031, name:'Sleepy Hollow Lake House', type:'Entire home', rev:9800, price:150, rating:4.0, reviews:14, occ:18, dist:24.8},
+      {id:12345032, name:'Timber Ridge Economy 3BR', type:'Entire home', rev:9200, price:145, rating:3.9, reviews:12, occ:17, dist:26.2},
+      {id:12345033, name:'Pine Ridge Cabin 3BR', type:'Entire home', rev:8600, price:142, rating:3.9, reviews:10, occ:16, dist:27.5},
+      {id:12345034, name:'Rustic Shores Budget Cabin', type:'Entire home', rev:7900, price:135, rating:3.8, reviews:9, occ:15, dist:28.1},
+      {id:12345035, name:'Maple Lane Budget Lakehouse', type:'Entire home', rev:7200, price:128, rating:3.8, reviews:8, occ:14, dist:30.2},
+      {id:12345036, name:'Cedar Bluff Basic 3BR', type:'Entire home', rev:6500, price:122, rating:3.7, reviews:7, occ:13, dist:32.4},
+      {id:12345037, name:'Ozark Hollow Starter Cabin', type:'Entire home', rev:5800, price:118, rating:3.6, reviews:5, occ:12, dist:35.1},
+      {id:12345038, name:'Backwater Cove Economy Home', type:'Entire home', rev:5200, price:112, rating:3.5, reviews:4, occ:10, dist:38.6},
+    ];
+
+    function revColor(rev) {
+      if (rev >= 30000) return 'var(--green)';
+      if (rev >= 15000) return 'var(--gray-900)';
+      return 'var(--red)';
+    }
+    function fmt(n) { return n.toLocaleString('en-US'); }
+
+    function renderComps() {
+      const tbody = document.getElementById('compBody');
+      tbody.innerHTML = compData.map(c =>
+        `<tr>
+          <td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td>
+          <td><a href="https://www.airbnb.com/rooms/${c.id}" target="_blank">${c.name}</a></td>
+          <td>${c.type}</td>
+          <td style="font-weight:600;color:${revColor(c.rev)};">$${fmt(c.rev)}</td>
+          <td>$${c.price}</td>
+          <td>${c.rating}</td>
+          <td>${c.reviews}</td>
+          <td>${c.occ}%</td>
+          <td>${c.dist} mi</td>
+        </tr>`
+      ).join('');
+      document.getElementById('compFooter').textContent =
+        `Showing ${compData.length} of 247 matching comps (scroll for more)`;
+      updateCount();
+    }
+
     function toggleAll(checked) {
       document.querySelectorAll('.comp-cb').forEach(c => c.checked = checked);
       document.querySelectorAll('#compTable thead input[type="checkbox"], #selectAll').forEach(c => c.checked = checked);
       updateCount();
     }
+
     function updateCount() {
       const total = document.querySelectorAll('.comp-cb').length;
       const checked = document.querySelectorAll('.comp-cb:checked').length;
@@ -362,6 +423,8 @@
         rows.forEach(r => tbody.appendChild(r));
       });
     });
+
+    renderComps();
   </script>
 </body>
 </html>
