@@ -22,9 +22,6 @@
     .filter-pill.active { background: var(--sage-pale); border-color: var(--sage); color: var(--navy); }
     .row-actions { display: flex; gap: 4px; }
     .row-actions .btn-sm { padding: 4px 10px; font-size: 11px; border-radius: 4px; }
-    .revenue-high { color: var(--green); font-weight: 700; }
-    .revenue-mid { color: var(--gray-900); font-weight: 700; }
-    .revenue-low { color: var(--red); font-weight: 700; }
     .pagination {
       display: flex; align-items: center; justify-content: space-between;
       margin-top: 16px; font-size: 12px; color: var(--gray-500);
@@ -35,9 +32,15 @@
       border-radius: 4px; background: var(--white); cursor: pointer; font-size: 12px;
     }
     .pagination-btns button.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
-    .sortable { cursor: pointer; user-select: none; }
-    .sortable:hover { opacity: 0.8; }
-    .sortable::after { content: ' \2195'; font-size: 9px; opacity: 0.5; }
+    .data-table thead th {
+      cursor: pointer; user-select: none;
+    }
+    .data-table thead th:hover { opacity: 0.85; }
+    .data-table thead th::after { content: ' \2195'; font-size: 9px; opacity: 0.5; }
+    .data-table thead th:last-child { cursor: default; }
+    .data-table thead th:last-child::after { content: ''; }
+    .data-table thead th.sorted-asc::after { content: ' \2191'; opacity: 1; }
+    .data-table thead th.sorted-desc::after { content: ' \2193'; opacity: 1; }
   </style>
 </head>
 <body>
@@ -67,41 +70,41 @@
     </div>
 
     <div class="list-toolbar">
-      <input type="text" class="search-input" placeholder="Search properties...">
+      <input type="text" class="search-input" placeholder="Search properties..." id="searchInput">
       <div class="filter-pills">
-        <span class="filter-pill active">All</span>
-        <span class="filter-pill">1 BR</span>
-        <span class="filter-pill">2 BR</span>
-        <span class="filter-pill">3 BR</span>
-        <span class="filter-pill">4 BR</span>
-        <span class="filter-pill">5+ BR</span>
+        <span class="filter-pill active" data-br="all">All</span>
+        <span class="filter-pill" data-br="1">1 BR</span>
+        <span class="filter-pill" data-br="2">2 BR</span>
+        <span class="filter-pill" data-br="3">3 BR</span>
+        <span class="filter-pill" data-br="4">4 BR</span>
+        <span class="filter-pill" data-br="5">5+ BR</span>
       </div>
     </div>
 
     <div class="card">
-      <table class="data-table">
+      <table class="data-table" id="estimatesTable">
         <thead>
           <tr>
-            <th class="sortable">Property Address</th>
-            <th>BR</th>
-            <th class="sortable">Est. Revenue</th>
-            <th>Comps</th>
-            <th>Created</th>
-            <th>Agent</th>
+            <th data-col="0">Property Address</th>
+            <th data-col="1">BR</th>
+            <th data-col="2">Est. Revenue</th>
+            <th data-col="3">Comps</th>
+            <th data-col="4">Created</th>
+            <th data-col="5">Agent</th>
             <th style="width: 160px;">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td><strong>1481 Ledges Dr, Osage Beach, MO</strong></td><td>3</td><td class="revenue-mid">$14,705</td><td>554</td><td>May 15, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="04-view-report.html" class="btn btn-secondary btn-sm">View</a><a href="05-add-edit.html" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
-          <tr><td><strong>234 Lakewood Ct, Lake Ozark, MO</strong></td><td>4</td><td class="revenue-high">$22,400</td><td>312</td><td>May 14, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
-          <tr><td><strong>88 Harbor Point, Sunrise Beach, MO</strong></td><td>3</td><td class="revenue-high">$18,299</td><td>268</td><td>May 12, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
-          <tr><td><strong>1920 Horseshoe Bend, Camdenton, MO</strong></td><td>5</td><td class="revenue-high">$31,500</td><td>142</td><td>May 8, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
-          <tr><td><strong>45 Quiet Cove Rd, Gravois Mills, MO</strong></td><td>2</td><td class="revenue-low">$9,800</td><td>410</td><td>May 5, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
-          <tr><td><strong>312 Grand View Ter, Porto Cima, MO</strong></td><td>4</td><td class="revenue-high">$26,100</td><td>198</td><td>Apr 30, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
-          <tr><td><strong>412 Lakeside Blvd, Camdenton, MO</strong></td><td>3</td><td class="revenue-mid">$16,200</td><td>380</td><td>Apr 28, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
-          <tr><td><strong>750 Shawnee Bend Rd, Sunrise Beach, MO</strong></td><td>4</td><td class="revenue-high">$24,800</td><td>245</td><td>Apr 25, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
-          <tr><td><strong>22 Emerald Bay Dr, Lake Ozark, MO</strong></td><td>3</td><td class="revenue-mid">$15,400</td><td>320</td><td>Apr 22, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
-          <tr><td><strong>610 Osage Beach Pkwy, Osage Beach, MO</strong></td><td>2</td><td class="revenue-low">$10,500</td><td>390</td><td>Apr 20, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
+          <tr><td><strong>1481 Ledges Dr, Osage Beach, MO</strong></td><td>3</td><td class="font-bold" style="color:var(--green)">$14,705</td><td>554</td><td>May 15, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="04-view-report.html" class="btn btn-secondary btn-sm">View</a><a href="05-add-edit.html" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
+          <tr><td><strong>234 Lakewood Ct, Lake Ozark, MO</strong></td><td>4</td><td class="font-bold" style="color:var(--green)">$22,400</td><td>312</td><td>May 14, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
+          <tr><td><strong>88 Harbor Point, Sunrise Beach, MO</strong></td><td>3</td><td class="font-bold" style="color:var(--green)">$18,299</td><td>268</td><td>May 12, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
+          <tr><td><strong>1920 Horseshoe Bend, Camdenton, MO</strong></td><td>5</td><td class="font-bold" style="color:var(--green)">$31,500</td><td>142</td><td>May 8, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
+          <tr><td><strong>45 Quiet Cove Rd, Gravois Mills, MO</strong></td><td>2</td><td class="font-bold" style="color:var(--red)">$9,800</td><td>410</td><td>May 5, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
+          <tr><td><strong>312 Grand View Ter, Porto Cima, MO</strong></td><td>4</td><td class="font-bold" style="color:var(--green)">$26,100</td><td>198</td><td>Apr 30, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
+          <tr><td><strong>412 Lakeside Blvd, Camdenton, MO</strong></td><td>3</td><td class="font-bold">$16,200</td><td>380</td><td>Apr 28, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
+          <tr><td><strong>750 Shawnee Bend Rd, Sunrise Beach, MO</strong></td><td>4</td><td class="font-bold" style="color:var(--green)">$24,800</td><td>245</td><td>Apr 25, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
+          <tr><td><strong>22 Emerald Bay Dr, Lake Ozark, MO</strong></td><td>3</td><td class="font-bold">$15,400</td><td>320</td><td>Apr 22, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
+          <tr><td><strong>610 Osage Beach Pkwy, Osage Beach, MO</strong></td><td>2</td><td class="font-bold" style="color:var(--red)">$10,500</td><td>390</td><td>Apr 20, 2026</td><td>Vicki B.</td><td><div class="row-actions"><a href="#" class="btn btn-secondary btn-sm">View</a><a href="#" class="btn btn-secondary btn-sm">Edit</a><button class="btn btn-sage btn-sm">PDF</button></div></td></tr>
         </tbody>
       </table>
     </div>
@@ -110,5 +113,54 @@
       <div class="pagination-btns"><button class="active">1</button><button>2</button><button>3</button></div>
     </div>
   </div>
+
+  <script>
+    // Column sorting
+    document.querySelectorAll('#estimatesTable thead th[data-col]').forEach(th => {
+      th.addEventListener('click', function() {
+        const table = document.getElementById('estimatesTable');
+        const tbody = table.querySelector('tbody');
+        const col = parseInt(this.dataset.col);
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const isAsc = this.classList.contains('sorted-asc');
+        table.querySelectorAll('th').forEach(h => h.classList.remove('sorted-asc','sorted-desc'));
+        this.classList.add(isAsc ? 'sorted-desc' : 'sorted-asc');
+        rows.sort((a, b) => {
+          let va = a.cells[col].textContent.trim();
+          let vb = b.cells[col].textContent.trim();
+          if (col === 1 || col === 3) { va = parseInt(va); vb = parseInt(vb); }
+          else if (col === 2) { va = parseInt(va.replace(/[$,]/g,'')); vb = parseInt(vb.replace(/[$,]/g,'')); }
+          else { va = va.toLowerCase(); vb = vb.toLowerCase(); }
+          if (va < vb) return isAsc ? 1 : -1;
+          if (va > vb) return isAsc ? -1 : 1;
+          return 0;
+        });
+        rows.forEach(r => tbody.appendChild(r));
+      });
+    });
+
+    // Search filter
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const q = this.value.toLowerCase();
+      document.querySelectorAll('#estimatesTable tbody tr').forEach(tr => {
+        tr.style.display = tr.cells[0].textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    });
+
+    // BR filter pills
+    document.querySelectorAll('.filter-pill').forEach(pill => {
+      pill.addEventListener('click', function() {
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+        const br = this.dataset.br;
+        document.querySelectorAll('#estimatesTable tbody tr').forEach(tr => {
+          if (br === 'all') { tr.style.display = ''; return; }
+          const val = parseInt(tr.cells[1].textContent);
+          if (br === '5') { tr.style.display = val >= 5 ? '' : 'none'; }
+          else { tr.style.display = val === parseInt(br) ? '' : 'none'; }
+        });
+      });
+    });
+  </script>
 </body>
 </html>

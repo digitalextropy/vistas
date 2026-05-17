@@ -30,10 +30,7 @@
     .filter-group {
       padding: 14px; background: var(--gray-50); border-radius: 6px; border: 1px solid var(--gray-100);
     }
-    .filter-group-label {
-      font-size: 11px; font-weight: 600; color: var(--gray-700);
-      text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 8px;
-    }
+    .filter-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .comp-table-container {
       margin-top: 16px; border: 1px solid var(--gray-200); border-radius: 6px; overflow: hidden;
     }
@@ -50,18 +47,18 @@
     .comp-table th::after { content: ' \2195'; font-size: 8px; opacity: 0.5; }
     .comp-table th:first-child { cursor: default; }
     .comp-table th:first-child::after { content: ''; }
+    .comp-table th.sorted-asc::after { content: ' \2191'; opacity: 1; }
+    .comp-table th.sorted-desc::after { content: ' \2193'; opacity: 1; }
     .comp-table td { padding: 6px 8px; border-bottom: 1px solid var(--gray-100); }
     .comp-table tr:nth-child(even) { background: var(--gray-50); }
     .comp-table tr:hover { background: var(--sage-pale); }
     .comp-table input[type="checkbox"] { cursor: pointer; }
+    .comp-table a { color: var(--navy); text-decoration: none; }
+    .comp-table a:hover { text-decoration: underline; }
     .comp-toolbar {
       display: flex; align-items: center; justify-content: space-between;
       padding: 8px 12px; background: var(--gray-50); border-bottom: 1px solid var(--gray-200);
       font-size: 12px; color: var(--gray-700);
-    }
-    .kpi-auto-note {
-      font-size: 11px; color: var(--gray-500); font-style: italic;
-      padding: 8px 12px; background: var(--sage-pale); border-radius: 4px; margin-bottom: 12px;
     }
     .actions-bar {
       position: sticky; bottom: 0; background: var(--white);
@@ -166,7 +163,7 @@
       </div>
     </div>
 
-    <!-- Section 3: Comp Filters (now includes Bedrooms) -->
+    <!-- Section 3: Comp Filters -->
     <div class="section">
       <div class="section-header">
         <div class="section-title">Comp Set Filters</div>
@@ -175,22 +172,26 @@
       <div class="section-body">
         <div class="filter-section">
           <div>
-            <div class="filter-group">
-              <div class="filter-group-label">Bedrooms</div>
-              <div class="stepper">
-                <button>-</button><span>3</span><button>+</button>
+            <div class="filter-row-2">
+              <div class="filter-group">
+                <div class="filter-group-label" style="font-size:11px;font-weight:600;color:var(--gray-700);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px;">Bedrooms</div>
+                <div class="stepper">
+                  <button>-</button><span>3</span><button>+</button>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-group-label" style="font-size:11px;font-weight:600;color:var(--gray-700);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px;">Bathrooms</div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <div class="stepper">
+                    <button>-</button><span>2</span><button>+</button>
+                  </div>
+                  <span style="font-size: 11px; color: var(--gray-500);">or</span>
+                  <span class="chip active" style="padding: 4px 10px; font-size: 11px;">Any</span>
+                </div>
               </div>
             </div>
             <div class="filter-group" style="margin-top: 12px;">
-              <div class="filter-group-label">Bathrooms</div>
-              <div class="stepper">
-                <button>-</button><span>2</span><button>+</button>
-              </div>
-              <span style="font-size: 11px; color: var(--gray-500); margin-left: 8px;">or</span>
-              <span class="chip active" style="margin-left: 4px; padding: 4px 10px; font-size: 11px;">Any</span>
-            </div>
-            <div class="filter-group" style="margin-top: 12px;">
-              <div class="filter-group-label">Listing Category</div>
+              <div class="filter-group-label" style="font-size:11px;font-weight:600;color:var(--gray-700);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px;">Listing Category</div>
               <div class="chip-group">
                 <span class="chip">Economy</span>
                 <span class="chip active">Midscale</span>
@@ -199,7 +200,7 @@
               </div>
             </div>
             <div class="filter-group" style="margin-top: 12px;">
-              <div class="filter-group-label">Amenities</div>
+              <div class="filter-group-label" style="font-size:11px;font-weight:600;color:var(--gray-700);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px;">Amenities</div>
               <div class="chip-group">
                 <span class="chip active">Lakefront</span>
                 <span class="chip">Pool</span>
@@ -213,14 +214,14 @@
           </div>
           <div>
             <div class="filter-group">
-              <div class="filter-group-label">Min Active Nights</div>
+              <div class="filter-group-label" style="font-size:11px;font-weight:600;color:var(--gray-700);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px;">Min Active Nights</div>
               <div class="slider-wrap">
                 <input type="range" class="slider" min="0" max="365" value="150">
                 <div class="slider-value">150 nights</div>
               </div>
             </div>
             <div class="filter-group" style="margin-top: 12px;">
-              <div class="filter-group-label">Radius from Property</div>
+              <div class="filter-group-label" style="font-size:11px;font-weight:600;color:var(--gray-700);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px;">Radius from Property</div>
               <div class="slider-wrap">
                 <input type="range" class="slider" min="5" max="50" value="50">
                 <div class="slider-value">No limit</div>
@@ -228,7 +229,7 @@
               <div style="font-size: 10px; color: var(--gray-500); margin-top: 4px;">Requires geocoded property address</div>
             </div>
             <div class="filter-group" style="margin-top: 12px;">
-              <div class="filter-group-label">Activity Quality Filter</div>
+              <div class="filter-group-label" style="font-size:11px;font-weight:600;color:var(--gray-700);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px;">Activity Quality Filter</div>
               <div class="toggle-wrap">
                 <div class="toggle"></div>
                 <span class="toggle-label">Only high-activity listings</span>
@@ -238,47 +239,46 @@
           </div>
         </div>
 
-        <!-- Comp Table with checkboxes and sorting -->
+        <!-- Comp Table -->
         <div class="comp-table-container" style="margin-top: 16px;">
           <div class="comp-toolbar">
             <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-              <input type="checkbox" id="selectAll" checked onchange="document.querySelectorAll('.comp-cb').forEach(c=>c.checked=this.checked)">
-              <strong>247 comps</strong> &mdash; all selected
+              <input type="checkbox" id="selectAll" checked onchange="toggleAll(this.checked)">
+              <strong>247 comps</strong> &mdash; <span id="selectedCount">247 selected</span>
             </label>
             <span style="color: var(--gray-400);">Click column headers to sort</span>
           </div>
           <div class="comp-table-scroll">
-            <table class="comp-table">
+            <table class="comp-table" id="compTable">
               <thead>
                 <tr>
-                  <th style="width:30px;"><input type="checkbox" checked onchange="document.querySelectorAll('.comp-cb').forEach(c=>c.checked=this.checked)"></th>
-                  <th>#</th>
-                  <th>Listing Name</th>
-                  <th>Type</th>
-                  <th>Revenue</th>
-                  <th>Price</th>
-                  <th>Rating</th>
-                  <th>Reviews</th>
-                  <th>Occ%</th>
-                  <th>Dist.</th>
+                  <th style="width:30px;"><input type="checkbox" checked onchange="toggleAll(this.checked)"></th>
+                  <th data-col="1">Listing Name</th>
+                  <th data-col="2">Type</th>
+                  <th data-col="3">Revenue</th>
+                  <th data-col="4">Price</th>
+                  <th data-col="5">Rating</th>
+                  <th data-col="6">Reviews</th>
+                  <th data-col="7">Occ%</th>
+                  <th data-col="8">Dist.</th>
                 </tr>
               </thead>
               <tbody>
-                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>1</td><td>Luxury Lakefront Retreat 3BR</td><td>Entire home</td><td style="font-weight:600;color:var(--green);">$32,400</td><td>$285</td><td>4.9</td><td>142</td><td>68%</td><td>3.2 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>2</td><td>Cove Point Villa w/ Dock</td><td>Entire home</td><td style="font-weight:600;color:var(--green);">$28,100</td><td>$260</td><td>4.8</td><td>98</td><td>62%</td><td>5.1 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>3</td><td>Sunset Bay Condo Unit 5</td><td>Entire home</td><td style="font-weight:600;">$21,500</td><td>$225</td><td>4.7</td><td>76</td><td>55%</td><td>1.8 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>4</td><td>Eagles Nest Lakeside 3BR</td><td>Entire home</td><td style="font-weight:600;">$19,200</td><td>$210</td><td>4.6</td><td>64</td><td>48%</td><td>8.4 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>5</td><td>Horseshoe Bend Hideaway</td><td>Entire home</td><td style="font-weight:600;">$16,800</td><td>$195</td><td>4.5</td><td>53</td><td>42%</td><td>12.3 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>6</td><td>Ozark Shores Family Home</td><td>Entire home</td><td style="font-weight:600;">$14,705</td><td>$185</td><td>4.4</td><td>41</td><td>38%</td><td>6.7 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>7</td><td>Lakeside Manor 3BR Condo</td><td>Entire home</td><td style="font-weight:600;">$14,200</td><td>$180</td><td>4.4</td><td>38</td><td>36%</td><td>9.1 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>8</td><td>Crystal Cove Retreat</td><td>Entire home</td><td style="font-weight:600;">$13,500</td><td>$178</td><td>4.3</td><td>35</td><td>34%</td><td>14.5 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>9</td><td>Windmill Point Lodge</td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$12,800</td><td>$172</td><td>4.3</td><td>29</td><td>32%</td><td>11.2 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>10</td><td>Quiet Waters 3BR Condo</td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$11,200</td><td>$165</td><td>4.3</td><td>27</td><td>30%</td><td>15.2 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>11</td><td>Driftwood Bay Cottage</td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$10,900</td><td>$160</td><td>4.2</td><td>24</td><td>28%</td><td>17.8 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>12</td><td>Lakeview Terrace Unit 12</td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$9,800</td><td>$150</td><td>4.1</td><td>19</td><td>26%</td><td>18.9 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>13</td><td>Harbor Light Inn Suite</td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$8,600</td><td>$142</td><td>4.0</td><td>15</td><td>22%</td><td>20.1 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>14</td><td>Sleepy Hollow Lake House</td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$7,900</td><td>$135</td><td>3.9</td><td>12</td><td>20%</td><td>22.4 mi</td></tr>
-                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>15</td><td>Pine Ridge Cabin 3BR</td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$6,200</td><td>$120</td><td>3.8</td><td>8</td><td>18%</td><td>25.6 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345001" target="_blank">Luxury Lakefront Retreat 3BR</a></td><td>Entire home</td><td style="font-weight:600;color:var(--green);">$32,400</td><td>$285</td><td>4.9</td><td>142</td><td>68%</td><td>3.2 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345002" target="_blank">Cove Point Villa w/ Dock</a></td><td>Entire home</td><td style="font-weight:600;color:var(--green);">$28,100</td><td>$260</td><td>4.8</td><td>98</td><td>62%</td><td>5.1 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345003" target="_blank">Sunset Bay Condo Unit 5</a></td><td>Entire home</td><td style="font-weight:600;color:var(--green);">$21,500</td><td>$225</td><td>4.7</td><td>76</td><td>55%</td><td>1.8 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345004" target="_blank">Eagles Nest Lakeside 3BR</a></td><td>Entire home</td><td style="font-weight:600;">$19,200</td><td>$210</td><td>4.6</td><td>64</td><td>48%</td><td>8.4 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345005" target="_blank">Horseshoe Bend Hideaway</a></td><td>Entire home</td><td style="font-weight:600;">$16,800</td><td>$195</td><td>4.5</td><td>53</td><td>42%</td><td>12.3 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345006" target="_blank">Ozark Shores Family Home</a></td><td>Entire home</td><td style="font-weight:600;">$14,705</td><td>$185</td><td>4.4</td><td>41</td><td>38%</td><td>6.7 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345007" target="_blank">Lakeside Manor 3BR Condo</a></td><td>Entire home</td><td style="font-weight:600;">$14,200</td><td>$180</td><td>4.4</td><td>38</td><td>36%</td><td>9.1 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345008" target="_blank">Crystal Cove Retreat</a></td><td>Entire home</td><td style="font-weight:600;">$13,500</td><td>$178</td><td>4.3</td><td>35</td><td>34%</td><td>14.5 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345009" target="_blank">Windmill Point Lodge</a></td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$12,800</td><td>$172</td><td>4.3</td><td>29</td><td>32%</td><td>11.2 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345010" target="_blank">Quiet Waters 3BR Condo</a></td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$11,200</td><td>$165</td><td>4.3</td><td>27</td><td>30%</td><td>15.2 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345011" target="_blank">Driftwood Bay Cottage</a></td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$10,900</td><td>$160</td><td>4.2</td><td>24</td><td>28%</td><td>17.8 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345012" target="_blank">Lakeview Terrace Unit 12</a></td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$9,800</td><td>$150</td><td>4.1</td><td>19</td><td>26%</td><td>18.9 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345013" target="_blank">Harbor Light Inn Suite</a></td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$8,600</td><td>$142</td><td>4.0</td><td>15</td><td>22%</td><td>20.1 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345014" target="_blank">Sleepy Hollow Lake House</a></td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$7,900</td><td>$135</td><td>3.9</td><td>12</td><td>20%</td><td>22.4 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked onchange="updateCount()"></td><td><a href="https://www.airbnb.com/rooms/12345015" target="_blank">Pine Ridge Cabin 3BR</a></td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$6,200</td><td>$120</td><td>3.8</td><td>8</td><td>18%</td><td>25.6 mi</td></tr>
               </tbody>
             </table>
           </div>
@@ -292,11 +292,12 @@
     <!-- Section 4: Market KPIs -->
     <div class="section">
       <div class="section-header">
-        <div class="section-title">Market Data (Auto-populated)</div>
+        <div class="section-title">Market KPIs (3BR)</div>
+        <span class="section-badge">Auto-populated</span>
       </div>
       <div class="section-body">
-        <div class="kpi-auto-note">
-          Auto-filled from Lake of the Ozarks 3BR data imported May 1, 2026. Edit only if overriding.
+        <div style="font-size: 11px; color: var(--gray-500); font-style: italic; padding: 8px 12px; background: var(--sage-pale); border-radius: 4px; margin-bottom: 12px;">
+          Market-wide averages for 3BR listings from PriceLabs (May 1, 2026). These appear on the report cover page and market overview. Edit only if overriding.
         </div>
         <div class="form-row-3">
           <div class="form-group"><label class="form-label">Market Avg Revenue</label><input type="text" class="form-input" value="$20,350"></div>
@@ -322,5 +323,45 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function toggleAll(checked) {
+      document.querySelectorAll('.comp-cb').forEach(c => c.checked = checked);
+      document.querySelectorAll('#compTable thead input[type="checkbox"], #selectAll').forEach(c => c.checked = checked);
+      updateCount();
+    }
+    function updateCount() {
+      const total = document.querySelectorAll('.comp-cb').length;
+      const checked = document.querySelectorAll('.comp-cb:checked').length;
+      document.getElementById('selectedCount').textContent = checked + ' of ' + total + ' selected';
+      const allChecked = checked === total;
+      document.querySelectorAll('#compTable thead input[type="checkbox"], #selectAll').forEach(c => c.checked = allChecked);
+    }
+
+    // Comp table sorting
+    document.querySelectorAll('#compTable thead th[data-col]').forEach(th => {
+      th.addEventListener('click', function() {
+        const table = document.getElementById('compTable');
+        const tbody = table.querySelector('tbody');
+        const col = parseInt(this.dataset.col);
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const isAsc = this.classList.contains('sorted-asc');
+        table.querySelectorAll('th').forEach(h => h.classList.remove('sorted-asc','sorted-desc'));
+        this.classList.add(isAsc ? 'sorted-desc' : 'sorted-asc');
+        rows.sort((a, b) => {
+          let va = a.cells[col].textContent.trim();
+          let vb = b.cells[col].textContent.trim();
+          if ([3,4,5,6].includes(col)) { va = parseFloat(va.replace(/[$,%]/g,'')); vb = parseFloat(vb.replace(/[$,%]/g,'')); }
+          else if (col === 7) { va = parseInt(va); vb = parseInt(vb); }
+          else if (col === 8) { va = parseFloat(va); vb = parseFloat(vb); }
+          else { va = va.toLowerCase(); vb = vb.toLowerCase(); }
+          if (va < vb) return isAsc ? 1 : -1;
+          if (va > vb) return isAsc ? -1 : 1;
+          return 0;
+        });
+        rows.forEach(r => tbody.appendChild(r));
+      });
+    });
+  </script>
 </body>
 </html>

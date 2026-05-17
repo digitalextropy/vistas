@@ -45,7 +45,12 @@
       text-align: left; font-weight: 600; font-size: 11px;
       text-transform: uppercase; letter-spacing: 0.3px;
       position: sticky; top: 0; z-index: 1;
+      cursor: pointer; user-select: none;
     }
+    .recent-scroll thead th:hover { opacity: 0.85; }
+    .recent-scroll thead th::after { content: ' \2195'; font-size: 9px; opacity: 0.5; }
+    .recent-scroll thead th.sorted-asc::after { content: ' \2191'; opacity: 1; }
+    .recent-scroll thead th.sorted-desc::after { content: ' \2193'; opacity: 1; }
     .recent-scroll tbody td { padding: 10px 12px; border-bottom: 1px solid var(--gray-100); }
     .recent-scroll tbody tr:nth-child(even) { background: var(--gray-50); }
     .recent-scroll tbody tr { cursor: pointer; }
@@ -89,60 +94,60 @@
     </div>
 
     <div class="market-grid">
-      <a href="03-estimates-list.html?market=branson" class="market-card" style="text-decoration:none;">
+      <div class="market-card" onclick="location.href='03-estimates-list.html?market=branson'">
         <div class="market-card-icon">&#127956;</div>
         <div class="market-card-name">Branson</div>
         <div class="market-card-stat"><span>Estimates (week / month)</span> <strong>3 / 15</strong></div>
         <div class="market-card-stat"><span>Market Size</span> <strong>312</strong></div>
         <div class="market-card-stat"><span>Last Refresh</span> <strong>May 1, 2026</strong></div>
         <div class="market-card-actions">
-          <a href="05-add-edit.html?market=branson" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">+ Add New Estimate</a>
+          <a href="05-add-edit.html?market=branson" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;" onclick="event.stopPropagation();">+ Add New Estimate</a>
         </div>
-      </a>
-      <a href="03-estimates-list.html?market=deep-creek" class="market-card" style="text-decoration:none;">
+      </div>
+      <div class="market-card" onclick="location.href='03-estimates-list.html?market=deep-creek'">
         <div class="market-card-icon">&#127754;</div>
         <div class="market-card-name">Deep Creek Lake</div>
         <div class="market-card-stat"><span>Estimates (week / month)</span> <strong>1 / 3</strong></div>
         <div class="market-card-stat"><span>Market Size</span> <strong>189</strong></div>
         <div class="market-card-stat"><span>Last Refresh</span> <strong>Apr 28, 2026</strong></div>
         <div class="market-card-actions">
-          <a href="05-add-edit.html?market=deep-creek" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">+ Add New Estimate</a>
+          <a href="05-add-edit.html?market=deep-creek" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;" onclick="event.stopPropagation();">+ Add New Estimate</a>
         </div>
-      </a>
-      <a href="03-estimates-list.html?market=lake-ozarks" class="market-card" style="text-decoration:none;">
+      </div>
+      <div class="market-card" onclick="location.href='03-estimates-list.html?market=lake-ozarks'">
         <div class="market-card-icon">&#127758;</div>
         <div class="market-card-name">Lake of the Ozarks</div>
         <div class="market-card-stat"><span>Estimates (week / month)</span> <strong>5 / 23</strong></div>
         <div class="market-card-stat"><span>Market Size</span> <strong>554</strong></div>
         <div class="market-card-stat"><span>Last Refresh</span> <strong>May 1, 2026</strong></div>
         <div class="market-card-actions">
-          <a href="05-add-edit.html?market=lake-ozarks" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">+ Add New Estimate</a>
+          <a href="05-add-edit.html?market=lake-ozarks" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;" onclick="event.stopPropagation();">+ Add New Estimate</a>
         </div>
-      </a>
-      <a href="03-estimates-list.html?market=poconos" class="market-card" style="text-decoration:none;">
+      </div>
+      <div class="market-card" onclick="location.href='03-estimates-list.html?market=poconos'">
         <div class="market-card-icon">&#127795;</div>
         <div class="market-card-name">Poconos</div>
         <div class="market-card-stat"><span>Estimates (week / month)</span> <strong>3 / 6</strong></div>
         <div class="market-card-stat"><span>Market Size</span> <strong>428</strong></div>
         <div class="market-card-stat"><span>Last Refresh</span> <strong>Apr 28, 2026</strong></div>
         <div class="market-card-actions">
-          <a href="05-add-edit.html?market=poconos" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">+ Add New Estimate</a>
+          <a href="05-add-edit.html?market=poconos" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;" onclick="event.stopPropagation();">+ Add New Estimate</a>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="recent-section">
       <div class="recent-title">Recent Estimates</div>
       <div class="recent-scroll">
-        <table>
+        <table id="recentTable">
           <thead>
             <tr>
-              <th>Property Address</th>
-              <th>Market</th>
-              <th>BR</th>
-              <th>Est. Revenue</th>
-              <th>Created</th>
-              <th>Agent</th>
+              <th data-col="0">Property Address</th>
+              <th data-col="1">Market</th>
+              <th data-col="2">BR</th>
+              <th data-col="3">Est. Revenue</th>
+              <th data-col="4">Created</th>
+              <th data-col="5">Agent</th>
             </tr>
           </thead>
           <tbody>
@@ -156,10 +161,76 @@
             <tr onclick="location.href='04-view-report.html'"><td><strong>55 Silver Dollar City Rd, Branson, MO</strong></td><td>Branson</td><td>3</td><td class="font-bold">$13,900</td><td>May 7</td><td>Vicki B.</td></tr>
             <tr onclick="location.href='04-view-report.html'"><td><strong>88 Harbor Point, Sunrise Beach, MO</strong></td><td>Lake of the Ozarks</td><td>3</td><td class="text-green font-bold">$18,299</td><td>May 6</td><td>Vicki B.</td></tr>
             <tr onclick="location.href='04-view-report.html'"><td><strong>300 Deep Creek Dr, McHenry, MD</strong></td><td>Deep Creek Lake</td><td>4</td><td class="text-green font-bold">$26,100</td><td>May 5</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>610 Osage Beach Pkwy, Osage Beach, MO</strong></td><td>Lake of the Ozarks</td><td>2</td><td class="text-red font-bold">$10,500</td><td>May 4</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>45 Quiet Cove Rd, Gravois Mills, MO</strong></td><td>Lake of the Ozarks</td><td>2</td><td class="text-red font-bold">$9,800</td><td>May 3</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>312 Grand View Ter, Porto Cima, MO</strong></td><td>Lake of the Ozarks</td><td>4</td><td class="text-green font-bold">$26,100</td><td>Apr 30</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>750 Shawnee Bend Rd, Sunrise Beach, MO</strong></td><td>Lake of the Ozarks</td><td>4</td><td class="text-green font-bold">$24,800</td><td>Apr 28</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>22 Emerald Bay Dr, Lake Ozark, MO</strong></td><td>Lake of the Ozarks</td><td>3</td><td class="font-bold">$15,400</td><td>Apr 25</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>101 Lakeshore Dr, McHenry, MD</strong></td><td>Deep Creek Lake</td><td>3</td><td class="font-bold">$18,900</td><td>Apr 23</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>445 Table Rock Ln, Branson, MO</strong></td><td>Branson</td><td>4</td><td class="text-green font-bold">$21,300</td><td>Apr 22</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>77 Arrowhead Trail, Pocono Lake, PA</strong></td><td>Poconos</td><td>3</td><td class="font-bold">$16,800</td><td>Apr 20</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>520 Regatta Bay, Lake Ozark, MO</strong></td><td>Lake of the Ozarks</td><td>3</td><td class="font-bold">$13,200</td><td>Apr 18</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>198 Dogwood Pass, Branson, MO</strong></td><td>Branson</td><td>2</td><td class="text-red font-bold">$8,400</td><td>Apr 16</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>62 Marsh Run, McHenry, MD</strong></td><td>Deep Creek Lake</td><td>5</td><td class="text-green font-bold">$38,200</td><td>Apr 15</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>901 Cove Landing, Camdenton, MO</strong></td><td>Lake of the Ozarks</td><td>4</td><td class="text-green font-bold">$20,100</td><td>Apr 14</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>33 Ski Lodge Dr, Tannersville, PA</strong></td><td>Poconos</td><td>4</td><td class="text-green font-bold">$25,700</td><td>Apr 12</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>280 Lazy River Rd, Osage Beach, MO</strong></td><td>Lake of the Ozarks</td><td>3</td><td class="font-bold">$14,900</td><td>Apr 10</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>15 Mountain Laurel, Bushkill, PA</strong></td><td>Poconos</td><td>3</td><td class="font-bold">$15,100</td><td>Apr 8</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>844 Silver Dollar Rd, Branson, MO</strong></td><td>Branson</td><td>3</td><td class="font-bold">$12,600</td><td>Apr 7</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>2100 Bagnell Dam Blvd, Lake Ozark, MO</strong></td><td>Lake of the Ozarks</td><td>2</td><td class="text-red font-bold">$11,800</td><td>Apr 5</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>57 Herring Run, McHenry, MD</strong></td><td>Deep Creek Lake</td><td>4</td><td class="text-green font-bold">$27,400</td><td>Apr 3</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>390 Indian Point Rd, Branson, MO</strong></td><td>Branson</td><td>5</td><td class="text-green font-bold">$29,800</td><td>Apr 1</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>188 Ozark Shores, Sunrise Beach, MO</strong></td><td>Lake of the Ozarks</td><td>3</td><td class="font-bold">$17,200</td><td>Mar 30</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>42 Bear Creek Rd, Tobyhanna, PA</strong></td><td>Poconos</td><td>2</td><td class="text-red font-bold">$9,900</td><td>Mar 28</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>715 Palisades Dr, Lake Ozark, MO</strong></td><td>Lake of the Ozarks</td><td>4</td><td class="text-green font-bold">$23,500</td><td>Mar 26</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>11 Glendale Rd, McHenry, MD</strong></td><td>Deep Creek Lake</td><td>3</td><td class="font-bold">$19,500</td><td>Mar 24</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>505 Fall Creek Rd, Branson, MO</strong></td><td>Branson</td><td>3</td><td class="font-bold">$14,100</td><td>Mar 22</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>860 Windmill Point, Camdenton, MO</strong></td><td>Lake of the Ozarks</td><td>3</td><td class="font-bold">$15,600</td><td>Mar 20</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>29 Pocono Blvd, Mount Pocono, PA</strong></td><td>Poconos</td><td>5</td><td class="text-green font-bold">$32,400</td><td>Mar 18</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>178 Eagle Point, Gravois Mills, MO</strong></td><td>Lake of the Ozarks</td><td>2</td><td class="text-red font-bold">$8,900</td><td>Mar 16</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>610 Deep Creek Loop, McHenry, MD</strong></td><td>Deep Creek Lake</td><td>2</td><td class="font-bold">$12,300</td><td>Mar 14</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>425 Branson Hills Pkwy, Branson, MO</strong></td><td>Branson</td><td>4</td><td class="text-green font-bold">$20,900</td><td>Mar 12</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>93 Crystal Cove Rd, Osage Beach, MO</strong></td><td>Lake of the Ozarks</td><td>3</td><td class="font-bold">$16,800</td><td>Mar 10</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>200 Timber Ridge, Pocono Pines, PA</strong></td><td>Poconos</td><td>3</td><td class="font-bold">$17,500</td><td>Mar 8</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>1310 Passover Rd, Osage Beach, MO</strong></td><td>Lake of the Ozarks</td><td>5</td><td class="text-green font-bold">$35,200</td><td>Mar 6</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>67 Wisp Mountain, McHenry, MD</strong></td><td>Deep Creek Lake</td><td>4</td><td class="text-green font-bold">$28,700</td><td>Mar 4</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>340 Shepherd of Hills, Branson, MO</strong></td><td>Branson</td><td>2</td><td class="text-red font-bold">$7,600</td><td>Mar 2</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>890 Porto Cima Dr, Sunrise Beach, MO</strong></td><td>Lake of the Ozarks</td><td>4</td><td class="text-green font-bold">$22,800</td><td>Feb 28</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>156 Blueberry Hill, East Stroudsburg, PA</strong></td><td>Poconos</td><td>4</td><td class="text-green font-bold">$24,100</td><td>Feb 26</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>48 Marina View, Lake Ozark, MO</strong></td><td>Lake of the Ozarks</td><td>3</td><td class="font-bold">$13,400</td><td>Feb 24</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>222 Roaring Fork, Branson, MO</strong></td><td>Branson</td><td>3</td><td class="font-bold">$15,800</td><td>Feb 22</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>530 Majestic Oaks, Camdenton, MO</strong></td><td>Lake of the Ozarks</td><td>5</td><td class="text-green font-bold">$29,400</td><td>Feb 20</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>88 Lakefront Ct, McHenry, MD</strong></td><td>Deep Creek Lake</td><td>3</td><td class="font-bold">$17,800</td><td>Feb 18</td><td>Vicki B.</td></tr>
+            <tr onclick="location.href='04-view-report.html'"><td><strong>14 Cedar Woods, Jim Thorpe, PA</strong></td><td>Poconos</td><td>2</td><td class="text-red font-bold">$10,200</td><td>Feb 16</td><td>Vicki B.</td></tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
+
+  <script>
+    document.querySelectorAll('#recentTable thead th').forEach(th => {
+      th.addEventListener('click', function() {
+        const table = document.getElementById('recentTable');
+        const tbody = table.querySelector('tbody');
+        const col = parseInt(this.dataset.col);
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const isAsc = this.classList.contains('sorted-asc');
+        table.querySelectorAll('th').forEach(h => h.classList.remove('sorted-asc','sorted-desc'));
+        this.classList.add(isAsc ? 'sorted-desc' : 'sorted-asc');
+        rows.sort((a, b) => {
+          let va = a.cells[col].textContent.trim();
+          let vb = b.cells[col].textContent.trim();
+          if (col === 2) { va = parseInt(va); vb = parseInt(vb); }
+          else if (col === 3) { va = parseInt(va.replace(/[$,]/g,'')); vb = parseInt(vb.replace(/[$,]/g,'')); }
+          else { va = va.toLowerCase(); vb = vb.toLowerCase(); }
+          if (va < vb) return isAsc ? 1 : -1;
+          if (va > vb) return isAsc ? -1 : 1;
+          return 0;
+        });
+        rows.forEach(r => tbody.appendChild(r));
+      });
+    });
+  </script>
 </body>
 </html>
