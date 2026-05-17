@@ -7,189 +7,89 @@
   <link rel="stylesheet" href="shared.css">
   <style>
     .form-page { max-width: 860px; }
-    .section-collapse-icon {
-      font-size: 12px;
-      color: var(--gray-400);
-      transition: transform 0.2s;
-    }
-    .section-collapse-icon.open { transform: rotate(180deg); }
     .agent-preview {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 12px 16px;
-      background: var(--sage-pale);
-      border-radius: 6px;
-      margin-bottom: 16px;
+      display: none; align-items: center; gap: 16px; padding: 12px 16px;
+      background: var(--sage-pale); border-radius: 6px; margin-top: 12px;
     }
+    .agent-preview.visible { display: flex; }
     .agent-preview-logo {
-      width: 48px;
-      height: 48px;
-      background: var(--white);
-      border: 1px solid var(--sage-light);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      color: var(--gray-500);
+      width: 48px; height: 48px; background: var(--white); border: 1px solid var(--sage-light);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: var(--gray-500);
     }
-    .agent-preview-info {
-      flex: 1;
-    }
-    .agent-preview-name {
-      font-weight: 700;
-      color: var(--navy);
-      font-size: 14px;
-    }
-    .agent-preview-details {
-      font-size: 12px;
-      color: var(--gray-500);
-    }
+    .agent-preview-info { flex: 1; }
+    .agent-preview-name { font-weight: 700; color: var(--navy); font-size: 14px; }
+    .agent-preview-details { font-size: 12px; color: var(--gray-500); }
     .comp-count-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      background: var(--navy);
-      color: var(--white);
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
-      margin-top: 12px;
+      display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px;
+      background: var(--navy); color: var(--white); border-radius: 20px;
+      font-size: 13px; font-weight: 600;
     }
-    .comp-count-badge .count {
-      font-size: 16px;
-      font-weight: 800;
-    }
-    .comp-expander {
-      margin-top: 12px;
-      padding: 10px 14px;
-      background: var(--gray-50);
-      border: 1px solid var(--gray-200);
-      border-radius: 6px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 12px;
-      color: var(--gray-700);
-    }
-    .comp-expander:hover { background: var(--gray-100); }
-    .comp-table-preview {
-      margin-top: 8px;
-      border: 1px solid var(--gray-200);
-      border-radius: 6px;
-      overflow: hidden;
-      max-height: 240px;
-      overflow-y: auto;
-    }
-    .comp-table-preview table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 11px;
-    }
-    .comp-table-preview th {
-      background: var(--navy);
-      color: white;
-      padding: 6px 8px;
-      text-align: left;
-      font-size: 10px;
-      text-transform: uppercase;
-      position: sticky;
-      top: 0;
-    }
-    .comp-table-preview td {
-      padding: 5px 8px;
-      border-bottom: 1px solid var(--gray-100);
-    }
-    .comp-table-preview tr:nth-child(even) { background: var(--gray-50); }
-    .filter-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
+    .comp-count-badge .count { font-size: 16px; font-weight: 800; }
+    .filter-section { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .filter-group {
-      padding: 14px;
-      background: var(--gray-50);
-      border-radius: 6px;
-      border: 1px solid var(--gray-100);
+      padding: 14px; background: var(--gray-50); border-radius: 6px; border: 1px solid var(--gray-100);
     }
     .filter-group-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--gray-700);
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      margin-bottom: 8px;
+      font-size: 11px; font-weight: 600; color: var(--gray-700);
+      text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 8px;
+    }
+    .comp-table-container {
+      margin-top: 16px; border: 1px solid var(--gray-200); border-radius: 6px; overflow: hidden;
+    }
+    .comp-table-scroll { max-height: 400px; overflow-y: auto; }
+    .comp-table {
+      width: 100%; border-collapse: collapse; font-size: 11px;
+    }
+    .comp-table th {
+      background: var(--navy); color: white; padding: 7px 8px; text-align: left;
+      font-size: 10px; text-transform: uppercase; position: sticky; top: 0; z-index: 1;
+      cursor: pointer; user-select: none;
+    }
+    .comp-table th:hover { opacity: 0.85; }
+    .comp-table th::after { content: ' \2195'; font-size: 8px; opacity: 0.5; }
+    .comp-table th:first-child { cursor: default; }
+    .comp-table th:first-child::after { content: ''; }
+    .comp-table td { padding: 6px 8px; border-bottom: 1px solid var(--gray-100); }
+    .comp-table tr:nth-child(even) { background: var(--gray-50); }
+    .comp-table tr:hover { background: var(--sage-pale); }
+    .comp-table input[type="checkbox"] { cursor: pointer; }
+    .comp-toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px; background: var(--gray-50); border-bottom: 1px solid var(--gray-200);
+      font-size: 12px; color: var(--gray-700);
     }
     .kpi-auto-note {
-      font-size: 11px;
-      color: var(--gray-500);
-      font-style: italic;
-      padding: 8px 12px;
-      background: var(--sage-pale);
-      border-radius: 4px;
-      margin-bottom: 12px;
+      font-size: 11px; color: var(--gray-500); font-style: italic;
+      padding: 8px 12px; background: var(--sage-pale); border-radius: 4px; margin-bottom: 12px;
     }
     .actions-bar {
-      position: sticky;
-      bottom: 0;
-      background: var(--white);
-      border-top: 1px solid var(--gray-200);
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 20px -32px -32px -32px;
-      box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+      position: sticky; bottom: 0; background: var(--white);
+      border-top: 1px solid var(--gray-200); padding: 16px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      margin: 20px -32px -32px -32px; box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
     }
-    .actions-bar-left { display: flex; gap: 8px; }
-    .actions-bar-right { display: flex; gap: 8px; }
     .textarea {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid var(--gray-300);
-      border-radius: 6px;
-      font-size: 13px;
-      font-family: inherit;
-      resize: vertical;
-      min-height: 60px;
+      width: 100%; padding: 10px 12px; border: 1px solid var(--gray-300);
+      border-radius: 6px; font-size: 13px; font-family: inherit;
+      resize: vertical; min-height: 120px;
     }
-    .textarea:focus {
-      outline: none;
-      border-color: var(--navy);
-      box-shadow: 0 0 0 3px rgba(27,46,75,0.1);
-    }
-    .geocode-row {
-      display: flex;
-      gap: 8px;
-      align-items: flex-end;
-    }
+    .textarea:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(27,46,75,0.1); }
+    .geocode-row { display: flex; gap: 8px; align-items: flex-end; }
     .geocode-row .form-group { flex: 1; margin-bottom: 0; }
-    .coord-display {
-      font-size: 11px;
-      color: var(--gray-500);
-      margin-top: 4px;
-    }
-    .coord-display code {
-      background: var(--gray-100);
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-size: 11px;
-    }
+    .coord-display { font-size: 11px; color: var(--gray-500); margin-top: 4px; }
+    .coord-display code { background: var(--gray-100); padding: 2px 6px; border-radius: 3px; font-size: 11px; }
   </style>
 </head>
 <body>
-  <!-- Top Nav -->
   <nav class="topnav">
     <div class="topnav-left">
-      <a href="02-dashboard.html" class="topnav-logo">Ozarks Vistas <span>Revenue</span></a>
+      <a href="02-dashboard.html" class="topnav-logo">Vistas <span>Revenue Estimator</span></a>
       <select class="topnav-market">
-        <option selected>Lake of the Ozarks</option>
         <option>Branson</option>
-        <option>Poconos</option>
         <option>Deep Creek Lake</option>
+        <option selected>Lake of the Ozarks</option>
+        <option>Poconos</option>
       </select>
     </div>
     <div class="topnav-right">
@@ -211,53 +111,24 @@
     <div class="section">
       <div class="section-header">
         <div class="section-title">Agent Profile</div>
-        <span class="section-collapse-icon open">&#9660;</span>
       </div>
       <div class="section-body">
-        <!-- Agent selector -->
         <div class="form-group">
           <label class="form-label">Select Agent</label>
-          <select class="form-input" style="max-width: 280px;">
-            <option selected>Vicki Brown</option>
-            <option>+ Add New Agent</option>
+          <select class="form-input" style="max-width: 280px;" id="agentSelect" onchange="document.getElementById('agentPreview').className = this.value ? 'agent-preview visible' : 'agent-preview'">
+            <option value="">-- Select an agent --</option>
+            <option value="vicki">Vicki Brown</option>
+            <option value="justin">Justin Holder</option>
           </select>
         </div>
-
-        <!-- Preview of selected agent -->
-        <div class="agent-preview">
+        <div class="agent-preview" id="agentPreview">
           <div class="agent-preview-logo">LOGO</div>
           <div class="agent-preview-info">
             <div class="agent-preview-name">Vicki Brown</div>
             <div class="agent-preview-details">vicki@ozarksvistas.com &middot; 251.284.8661</div>
           </div>
-          <button class="btn btn-secondary btn-sm">Edit</button>
         </div>
-
-        <!-- Editable fields (shown when "Edit" is clicked) -->
-        <div style="display: none;">
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Name</label>
-              <input type="text" class="form-input" value="Vicki Brown">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Email</label>
-              <input type="email" class="form-input" value="vicki@ozarksvistas.com">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Phone</label>
-              <input type="tel" class="form-input" value="251.284.8661">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Logo</label>
-              <input type="file" class="form-input" style="padding: 7px 12px;">
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group" style="margin-top: 12px;">
+        <div class="form-group" style="margin-top: 16px;">
           <label class="form-label">Custom Intro Message</label>
           <textarea class="textarea">This projection is based on comparable vacation rental listings in the market, providing data-driven revenue expectations for your property's short-term rental potential.</textarea>
         </div>
@@ -275,7 +146,6 @@
           <label class="form-label">Property Name</label>
           <input type="text" class="form-input" placeholder="e.g., 1481 Ledges, #948, Camdenton">
         </div>
-
         <div class="geocode-row">
           <div class="form-group" style="flex: 2;">
             <label class="form-label">Address</label>
@@ -287,16 +157,7 @@
           Coordinates: <code>38.1417, -92.6717</code> &nbsp;
           <a href="#" style="font-size: 11px; color: var(--navy);">Edit manually</a>
         </div>
-
         <div class="form-row" style="margin-top: 16px;">
-          <div class="form-group">
-            <label class="form-label">Bedrooms</label>
-            <div class="stepper">
-              <button>-</button>
-              <span>3</span>
-              <button>+</button>
-            </div>
-          </div>
           <div class="form-group">
             <label class="form-label">Market</label>
             <input type="text" class="form-input" value="Lake of the Ozarks" readonly style="background: var(--gray-50); color: var(--gray-500);">
@@ -305,29 +166,29 @@
       </div>
     </div>
 
-    <!-- Section 3: Comp Filters -->
+    <!-- Section 3: Comp Filters (now includes Bedrooms) -->
     <div class="section">
       <div class="section-header">
         <div class="section-title">Comp Set Filters</div>
-        <div class="comp-count-badge">
-          <span class="count">247</span> comps match
-        </div>
+        <div class="comp-count-badge"><span class="count">247</span> comps match</div>
       </div>
       <div class="section-body">
         <div class="filter-section">
-          <!-- Left column -->
           <div>
             <div class="filter-group">
+              <div class="filter-group-label">Bedrooms</div>
+              <div class="stepper">
+                <button>-</button><span>3</span><button>+</button>
+              </div>
+            </div>
+            <div class="filter-group" style="margin-top: 12px;">
               <div class="filter-group-label">Bathrooms</div>
               <div class="stepper">
-                <button>-</button>
-                <span>2</span>
-                <button>+</button>
+                <button>-</button><span>2</span><button>+</button>
               </div>
               <span style="font-size: 11px; color: var(--gray-500); margin-left: 8px;">or</span>
               <span class="chip active" style="margin-left: 4px; padding: 4px 10px; font-size: 11px;">Any</span>
             </div>
-
             <div class="filter-group" style="margin-top: 12px;">
               <div class="filter-group-label">Listing Category</div>
               <div class="chip-group">
@@ -337,7 +198,6 @@
                 <span class="chip">Luxury</span>
               </div>
             </div>
-
             <div class="filter-group" style="margin-top: 12px;">
               <div class="filter-group-label">Amenities</div>
               <div class="chip-group">
@@ -351,8 +211,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Right column -->
           <div>
             <div class="filter-group">
               <div class="filter-group-label">Min Active Nights</div>
@@ -361,126 +219,72 @@
                 <div class="slider-value">150 nights</div>
               </div>
             </div>
-
             <div class="filter-group" style="margin-top: 12px;">
               <div class="filter-group-label">Radius from Property</div>
               <div class="slider-wrap">
                 <input type="range" class="slider" min="5" max="50" value="50">
                 <div class="slider-value">No limit</div>
               </div>
-              <div style="font-size: 10px; color: var(--gray-500); margin-top: 4px;">
-                Requires geocoded property address
-              </div>
+              <div style="font-size: 10px; color: var(--gray-500); margin-top: 4px;">Requires geocoded property address</div>
             </div>
-
             <div class="filter-group" style="margin-top: 12px;">
               <div class="filter-group-label">Activity Quality Filter</div>
               <div class="toggle-wrap">
                 <div class="toggle"></div>
                 <span class="toggle-label">Only high-activity listings</span>
               </div>
-              <div style="font-size: 10px; color: var(--gray-500); margin-top: 6px;">
-                &#8805;75% active days, &lt;50% blocked days
-              </div>
+              <div style="font-size: 10px; color: var(--gray-500); margin-top: 6px;">&#8805;75% active days, &lt;50% blocked days</div>
             </div>
           </div>
         </div>
 
-        <!-- Expandable comp list -->
-        <div class="comp-expander">
-          <span>&#9654; Show matching comps (247 listings)</span>
-          <span style="color: var(--gray-400);">Click to expand</span>
-        </div>
-
-        <!-- Comp table (shown when expanded) -->
-        <div class="comp-table-preview">
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Listing Name</th>
-                <th>Type</th>
-                <th>Revenue</th>
-                <th>Price</th>
-                <th>Rating</th>
-                <th>Dist.</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Luxury Lakefront Retreat 3BR</td>
-                <td>Entire home</td>
-                <td style="font-weight: 600; color: var(--green);">$32,400</td>
-                <td>$285</td>
-                <td>4.9</td>
-                <td>3.2 mi</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Cove Point Villa w/ Dock</td>
-                <td>Entire home</td>
-                <td style="font-weight: 600; color: var(--green);">$28,100</td>
-                <td>$260</td>
-                <td>4.8</td>
-                <td>5.1 mi</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Sunset Bay Condo Unit 5</td>
-                <td>Entire home</td>
-                <td style="font-weight: 600;">$21,500</td>
-                <td>$225</td>
-                <td>4.7</td>
-                <td>1.8 mi</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Eagles Nest Lakeside 3BR</td>
-                <td>Entire home</td>
-                <td style="font-weight: 600;">$19,200</td>
-                <td>$210</td>
-                <td>4.6</td>
-                <td>8.4 mi</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Horseshoe Bend Hideaway</td>
-                <td>Entire home</td>
-                <td style="font-weight: 600;">$16,800</td>
-                <td>$195</td>
-                <td>4.5</td>
-                <td>12.3 mi</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Ozark Shores Family Home</td>
-                <td>Entire home</td>
-                <td style="font-weight: 600;">$14,705</td>
-                <td>$185</td>
-                <td>4.4</td>
-                <td>6.7 mi</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td>Quiet Waters 3BR Condo</td>
-                <td>Entire home</td>
-                <td style="font-weight: 600; color: var(--red);">$11,200</td>
-                <td>$165</td>
-                <td>4.3</td>
-                <td>15.2 mi</td>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td>Lakeview Terrace Unit 12</td>
-                <td>Entire home</td>
-                <td style="font-weight: 600; color: var(--red);">$9,800</td>
-                <td>$150</td>
-                <td>4.1</td>
-                <td>18.9 mi</td>
-              </tr>
-            </tbody>
-          </table>
+        <!-- Comp Table with checkboxes and sorting -->
+        <div class="comp-table-container" style="margin-top: 16px;">
+          <div class="comp-toolbar">
+            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+              <input type="checkbox" id="selectAll" checked onchange="document.querySelectorAll('.comp-cb').forEach(c=>c.checked=this.checked)">
+              <strong>247 comps</strong> &mdash; all selected
+            </label>
+            <span style="color: var(--gray-400);">Click column headers to sort</span>
+          </div>
+          <div class="comp-table-scroll">
+            <table class="comp-table">
+              <thead>
+                <tr>
+                  <th style="width:30px;"><input type="checkbox" checked onchange="document.querySelectorAll('.comp-cb').forEach(c=>c.checked=this.checked)"></th>
+                  <th>#</th>
+                  <th>Listing Name</th>
+                  <th>Type</th>
+                  <th>Revenue</th>
+                  <th>Price</th>
+                  <th>Rating</th>
+                  <th>Reviews</th>
+                  <th>Occ%</th>
+                  <th>Dist.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>1</td><td>Luxury Lakefront Retreat 3BR</td><td>Entire home</td><td style="font-weight:600;color:var(--green);">$32,400</td><td>$285</td><td>4.9</td><td>142</td><td>68%</td><td>3.2 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>2</td><td>Cove Point Villa w/ Dock</td><td>Entire home</td><td style="font-weight:600;color:var(--green);">$28,100</td><td>$260</td><td>4.8</td><td>98</td><td>62%</td><td>5.1 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>3</td><td>Sunset Bay Condo Unit 5</td><td>Entire home</td><td style="font-weight:600;">$21,500</td><td>$225</td><td>4.7</td><td>76</td><td>55%</td><td>1.8 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>4</td><td>Eagles Nest Lakeside 3BR</td><td>Entire home</td><td style="font-weight:600;">$19,200</td><td>$210</td><td>4.6</td><td>64</td><td>48%</td><td>8.4 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>5</td><td>Horseshoe Bend Hideaway</td><td>Entire home</td><td style="font-weight:600;">$16,800</td><td>$195</td><td>4.5</td><td>53</td><td>42%</td><td>12.3 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>6</td><td>Ozark Shores Family Home</td><td>Entire home</td><td style="font-weight:600;">$14,705</td><td>$185</td><td>4.4</td><td>41</td><td>38%</td><td>6.7 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>7</td><td>Lakeside Manor 3BR Condo</td><td>Entire home</td><td style="font-weight:600;">$14,200</td><td>$180</td><td>4.4</td><td>38</td><td>36%</td><td>9.1 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>8</td><td>Crystal Cove Retreat</td><td>Entire home</td><td style="font-weight:600;">$13,500</td><td>$178</td><td>4.3</td><td>35</td><td>34%</td><td>14.5 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>9</td><td>Windmill Point Lodge</td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$12,800</td><td>$172</td><td>4.3</td><td>29</td><td>32%</td><td>11.2 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>10</td><td>Quiet Waters 3BR Condo</td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$11,200</td><td>$165</td><td>4.3</td><td>27</td><td>30%</td><td>15.2 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>11</td><td>Driftwood Bay Cottage</td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$10,900</td><td>$160</td><td>4.2</td><td>24</td><td>28%</td><td>17.8 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>12</td><td>Lakeview Terrace Unit 12</td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$9,800</td><td>$150</td><td>4.1</td><td>19</td><td>26%</td><td>18.9 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>13</td><td>Harbor Light Inn Suite</td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$8,600</td><td>$142</td><td>4.0</td><td>15</td><td>22%</td><td>20.1 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>14</td><td>Sleepy Hollow Lake House</td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$7,900</td><td>$135</td><td>3.9</td><td>12</td><td>20%</td><td>22.4 mi</td></tr>
+                <tr><td><input type="checkbox" class="comp-cb" checked></td><td>15</td><td>Pine Ridge Cabin 3BR</td><td>Entire home</td><td style="font-weight:600;color:var(--red);">$6,200</td><td>$120</td><td>3.8</td><td>8</td><td>18%</td><td>25.6 mi</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="padding: 8px 12px; background: var(--gray-50); border-top: 1px solid var(--gray-200); font-size: 11px; color: var(--gray-500); text-align: center;">
+            Showing 15 of 247 matching comps (scroll for more)
+          </div>
         </div>
       </div>
     </div>
@@ -489,50 +293,30 @@
     <div class="section">
       <div class="section-header">
         <div class="section-title">Market Data (Auto-populated)</div>
-        <span class="section-collapse-icon">&#9660;</span>
       </div>
       <div class="section-body">
         <div class="kpi-auto-note">
           Auto-filled from Lake of the Ozarks 3BR data imported May 1, 2026. Edit only if overriding.
         </div>
         <div class="form-row-3">
-          <div class="form-group">
-            <label class="form-label">Market Avg Revenue</label>
-            <input type="text" class="form-input" value="$20,350">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Market Avg ADR</label>
-            <input type="text" class="form-input" value="$214">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Avg Occupancy</label>
-            <input type="text" class="form-input" value="31%">
-          </div>
+          <div class="form-group"><label class="form-label">Market Avg Revenue</label><input type="text" class="form-input" value="$20,350"></div>
+          <div class="form-group"><label class="form-label">Market Avg ADR</label><input type="text" class="form-input" value="$214"></div>
+          <div class="form-group"><label class="form-label">Avg Occupancy</label><input type="text" class="form-input" value="31%"></div>
         </div>
         <div class="form-row-3">
-          <div class="form-group">
-            <label class="form-label">RevPAR</label>
-            <input type="text" class="form-input" value="$67">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Total Listings</label>
-            <input type="text" class="form-input" value="1,350">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Active Listings</label>
-            <input type="text" class="form-input" value="554">
-          </div>
+          <div class="form-group"><label class="form-label">RevPAR</label><input type="text" class="form-input" value="$67"></div>
+          <div class="form-group"><label class="form-label">Total Listings</label><input type="text" class="form-input" value="1,350"></div>
+          <div class="form-group"><label class="form-label">Active Listings</label><input type="text" class="form-input" value="554"></div>
         </div>
       </div>
     </div>
 
     <!-- Sticky Actions Bar -->
     <div class="actions-bar">
-      <div class="actions-bar-left">
-        <button class="btn btn-secondary">Preview Report</button>
+      <div>
+        <button class="btn btn-secondary" onclick="window.open('04-view-report.html','_blank')">Preview Report</button>
       </div>
-      <div class="actions-bar-right">
-        <button class="btn btn-secondary">Save Draft</button>
+      <div style="display: flex; gap: 8px;">
         <button class="btn btn-sage">Save &amp; Download PDF</button>
         <button class="btn btn-primary">Save Estimate</button>
       </div>

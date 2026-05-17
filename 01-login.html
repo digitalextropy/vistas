@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login — Revenue Estimator</title>
+  <title>Login — Vistas Revenue Estimator</title>
   <link rel="stylesheet" href="shared.css">
   <style>
     body {
@@ -22,10 +22,6 @@
       box-shadow: var(--shadow-lg);
       text-align: center;
     }
-    .login-logo {
-      width: 180px;
-      margin-bottom: 8px;
-    }
     .login-brand {
       font-size: 22px;
       font-weight: 800;
@@ -39,38 +35,16 @@
     }
     .login-card .form-group { text-align: left; }
     .login-card .form-input { padding: 12px 14px; }
-    .login-divider {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 20px 0;
-      color: var(--gray-400);
-      font-size: 12px;
-    }
-    .login-divider::before,
-    .login-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--gray-200);
-    }
     .login-btn {
       width: 100%;
       padding: 12px;
       font-size: 14px;
       margin-top: 8px;
     }
-    .login-footer {
-      margin-top: 24px;
-      font-size: 12px;
-      color: var(--gray-500);
-    }
-    .login-footer a { color: var(--navy); font-weight: 600; text-decoration: none; }
   </style>
 </head>
 <body>
   <div class="login-card">
-    <!-- Logo placeholder -->
     <div style="margin-bottom: 12px;">
       <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
         <circle cx="30" cy="30" r="28" fill="#eef4ec" stroke="#A8C4A0" stroke-width="2"/>
@@ -78,13 +52,12 @@
         <path d="M24 38 L30 26 L36 38 Z" fill="#A8C4A0"/>
       </svg>
     </div>
-    <div class="login-brand">Ozarks Vistas</div>
-    <div class="login-tagline">Revenue Estimate Generator</div>
-
+    <div class="login-brand">Vistas Revenue Estimator</div>
+    <div class="login-tagline">Sign in to your account</div>
     <form>
       <div class="form-group">
         <label class="form-label">Email</label>
-        <input type="email" class="form-input" placeholder="you@ozarksvistas.com">
+        <input type="email" class="form-input" placeholder="you@example.com">
       </div>
       <div class="form-group">
         <label class="form-label">Password</label>
@@ -92,17 +65,6 @@
       </div>
       <button type="submit" class="btn btn-primary login-btn">Sign In</button>
     </form>
-
-    <div class="login-divider">or</div>
-
-    <button class="btn btn-secondary login-btn" style="margin-top: 0;">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-      Sign in with Google
-    </button>
-
-    <div class="login-footer">
-      Don't have an account? <a href="#">Contact admin</a>
-    </div>
   </div>
 </body>
 </html>
